@@ -1,51 +1,92 @@
-import React from 'react';
-import { Container, Heading, SectionWrapper, Card, Badge, Button } from '@/components/ui';
+import React, { useState } from 'react';
+import styles from './TeamPage.module.css';
+import { Container, Heading, Badge } from '@/components/ui';
+import { PlayerCard } from '@/components/player';
 import { squadDemoData } from '@/content/team';
+import { PlayerPosition } from '@/types/team';
+import { cn } from '@/utils/classNames';
+
+const POSITIONS: Array<'All' | PlayerPosition> = [
+  'All',
+  'Forward',
+  'Midfielder',
+  'Defender',
+  'Goalkeeper',
+];
 
 export const TeamPage: React.FC = () => {
-  return (
-    <SectionWrapper bg="white" padding="xl" style={{ paddingTop: '8rem' }}>
-      <Container>
-        <Heading
-          level="h1"
-          displayStyle="section"
-          eyebrow="First Team"
-          subtitle="The complete Kerala Blasters FC squad roster for the current campaign."
-        >
-          The <span className="text-editorial-italic">Squad</span>
-        </Heading>
+  const [selectedPosition, setSelectedPosition] = useState<'All' | PlayerPosition>('All');
 
-        <div
-          style={{
-            display: 'grid',
-            gridTemplateColumns: 'repeat(auto-fill, minmax(280px, 1fr))',
-            gap: '1.5rem',
-            marginTop: '3rem',
-          }}
-        >
-          {squadDemoData.map((player) => (
-            <Card key={player.id} variant="elevated" padding="md">
-              <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
-                <span style={{ fontSize: '1.5rem', fontWeight: 700, fontFamily: 'var(--font-display)' }}>
-                  #{player.number}
-                </span>
-                <Badge variant={player.isCaptain ? 'accent' : 'default'}>
-                  {player.position}
-                </Badge>
-              </div>
-              <h3 style={{ marginTop: '1rem', fontSize: '1.25rem' }}>{player.name}</h3>
-              <p style={{ color: 'var(--color-grey-medium)', fontSize: '0.875rem', marginTop: '0.25rem' }}>
-                {player.nationality}
-              </p>
-              <div style={{ marginTop: '1.5rem' }}>
-                <Button href={`/team/${player.slug}`} variant="secondary" size="sm" fullWidth>
-                  View Profile
-                </Button>
-              </div>
-            </Card>
-          ))}
-        </div>
-      </Container>
-    </SectionWrapper>
+  const filteredPlayers = squadDemoData.filter((player) => {
+    if (selectedPosition === 'All') return true;
+    return player.position === selectedPosition;
+  });
+
+  return (
+    <div className={styles.pageRoot}>
+      {/* Editorial Header */}
+      <section className={styles.headerSection}>
+        <Container size="wide">
+          <div className={styles.headerTop}>
+            <div className="text-eyebrow text-eyebrow-accent">
+              KERALA BLASTERS FC • FIRST TEAM
+            </div>
+            <Badge variant="accent">Season 2024–25</Badge>
+          </div>
+
+          <Heading
+            level="h1"
+            displayStyle="hero"
+            subtitle="The complete first-team roster representing Kerala Blasters FC in national and continental football."
+          >
+            The <span className="text-editorial-italic">Squad.</span>
+          </Heading>
+
+          {/* Position Filters & Count */}
+          <div className={styles.filterBar}>
+            <div className={styles.filterPills} role="tablist" aria-label="Filter squad roster">
+              {POSITIONS.map((pos) => {
+                const isActive = selectedPosition === pos;
+                return (
+                  <button
+                    key={pos}
+                    type="button"
+                    role="tab"
+                    aria-selected={isActive}
+                    className={cn(styles.filterPill, isActive && styles.filterPillActive)}
+                    onClick={() => setSelectedPosition(pos)}
+                  >
+                    {pos === 'All' ? 'All Positions' : `${pos}s`}
+                  </button>
+                );
+              })}
+            </div>
+
+            <div className={styles.rosterCount}>
+              Showing <strong>{filteredPlayers.length}</strong> players
+            </div>
+          </div>
+        </Container>
+      </section>
+
+      {/* Squad Grid */}
+      <section className={styles.gridSection}>
+        <Container size="wide">
+          <div className={styles.rosterGrid}>
+            {filteredPlayers.map((player) => (
+              <PlayerCard key={player.id} player={player} />
+            ))}
+          </div>
+
+          {/* Demo Data Disclaimer */}
+          <div className={styles.demoDisclaimer}>
+            <Badge variant="default">Demo Content Layer</Badge>
+            <p className="text-caption">
+              Player metrics and media shown during development are curated concept representations. Official verified profiles will connect via the club CMS.
+            </p>
+          </div>
+        </Container>
+      </section>
+    </div>
   );
 };

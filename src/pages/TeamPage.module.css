@@ -1,0 +1,118 @@
+.pageRoot {
+  width: 100%;
+  background-color: var(--color-white);
+  color: var(--color-black);
+}
+
+.headerSection {
+  padding-top: clamp(7.5rem, 14vh, 10rem);
+  padding-bottom: clamp(2.5rem, 5vw, 4rem);
+  background-color: var(--color-grey-soft);
+  border-bottom: 1px solid var(--color-grey-border);
+}
+
+.headerTop {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 1rem;
+  flex-wrap: wrap;
+  gap: 1rem;
+}
+
+.filterBar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-top: clamp(2rem, 4vw, 3rem);
+  padding-top: 1.5rem;
+  border-top: 1px solid var(--color-grey-border);
+  flex-wrap: wrap;
+  gap: 1rem;
+}
+
+.filterPills {
+  display: flex;
+  gap: 0.5rem;
+  flex-wrap: wrap;
+}
+
+.filterPill {
+  font-family: var(--font-body);
+  font-size: 0.8125rem;
+  font-weight: 600;
+  padding: 0.5rem 1.125rem;
+  border-radius: var(--radius-pill);
+  background-color: var(--color-white);
+  color: var(--color-grey-medium);
+  border: 1px solid var(--color-grey-border);
+  cursor: pointer;
+  transition: all var(--transition-fast);
+}
+
+.filterPill:hover {
+  color: var(--color-black);
+  border-color: var(--color-black);
+}
+
+.filterPillActive {
+  background-color: var(--color-black);
+  color: var(--color-white);
+  border-color: var(--color-black);
+}
+
+.filterPillActive:hover {
+  background-color: var(--color-black);
+  color: var(--color-white);
+}
+
+.rosterCount {
+  font-size: 0.875rem;
+  color: var(--color-grey-medium);
+}
+
+.rosterCount strong {
+  color: var(--color-black);
+}
+
+/* Grid Section */
+.gridSection {
+  padding-top: clamp(3rem, 6vw, 5rem);
+  padding-bottom: clamp(4rem, 8vw, 7rem);
+}
+
+.rosterGrid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: clamp(1.25rem, 2.5vw, 2rem);
+}
+
+.demoDisclaimer {
+  margin-top: clamp(3rem, 6vw, 5rem);
+  padding: 1.5rem;
+  border-radius: var(--radius-lg);
+  background-color: var(--color-grey-soft);
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  flex-wrap: wrap;
+}
+
+/* Responsive Grid */
+@media (max-width: 1200px) {
+  .rosterGrid {
+    grid-template-columns: repeat(3, 1fr);
+  }
+}
+
+@media (max-width: 840px) {
+  .rosterGrid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (max-width: 520px) {
+  .rosterGrid {
+    grid-template-columns: 1fr;
+  }
+}

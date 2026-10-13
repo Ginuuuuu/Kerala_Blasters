@@ -1,0 +1,232 @@
+.pageRoot {
+  width: 100%;
+  min-height: 100vh;
+  background-color: var(--color-white);
+  color: var(--color-black);
+  padding-top: clamp(6.5rem, 12vh, 9rem);
+  padding-bottom: clamp(4rem, 8vw, 7rem);
+}
+
+.topNavigation {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: clamp(1.5rem, 3vw, 2.5rem);
+  flex-wrap: wrap;
+  gap: 1rem;
+}
+
+.backLink {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  font-family: var(--font-body);
+  font-size: 0.875rem;
+  font-weight: 600;
+  color: var(--color-grey-medium);
+  transition: color var(--transition-fast), transform var(--transition-fast);
+}
+
+.backLink:hover {
+  color: var(--color-black);
+  transform: translateX(-4px);
+}
+
+.playerNavButtons {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.playerNavBtn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 38px;
+  height: 38px;
+  border-radius: 50%;
+  border: 1px solid var(--color-grey-border);
+  background-color: var(--color-white);
+  color: var(--color-black);
+  transition: all var(--transition-fast);
+}
+
+.playerNavBtn:hover {
+  background-color: var(--color-black);
+  color: var(--color-white);
+  border-color: var(--color-black);
+}
+
+/* Layout: 2 Columns (Image Frame + Details) */
+.profileGrid {
+  display: grid;
+  grid-template-columns: 1fr 1.25fr;
+  gap: clamp(2rem, 5vw, 5rem);
+  align-items: start;
+}
+
+/* Left: Portrait Frame */
+.imageCard {
+  position: relative;
+  aspect-ratio: 3 / 4.2;
+  border-radius: var(--radius-xl);
+  overflow: hidden;
+  background-color: var(--color-black);
+  box-shadow: var(--shadow-card);
+  border: 1px solid var(--color-grey-border);
+}
+
+.playerImage {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center 20%;
+}
+
+.shirtNumberWatermark {
+  position: absolute;
+  top: 1.5rem;
+  right: 1.75rem;
+  font-family: var(--font-display);
+  font-size: clamp(3.5rem, 7vw, 6rem);
+  font-weight: 900;
+  line-height: 1;
+  color: rgba(255, 255, 255, 0.25);
+  user-select: none;
+  pointer-events: none;
+}
+
+/* Right: Profile Info */
+.infoColumn {
+  display: flex;
+  flex-direction: column;
+  gap: clamp(1.25rem, 2.5vw, 2rem);
+}
+
+.badgeHeader {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  flex-wrap: wrap;
+}
+
+.playerHeading {
+  font-family: var(--font-display);
+  font-size: clamp(2.25rem, 5vw, 4rem);
+  font-weight: 800;
+  line-height: 1.05;
+  letter-spacing: -0.03em;
+  text-transform: uppercase;
+}
+
+.bioBlock {
+  font-family: var(--font-body);
+  font-size: clamp(1rem, 1.2vw, 1.125rem);
+  line-height: 1.7;
+  color: #333333;
+}
+
+.bioBlock p + p {
+  margin-top: 1rem;
+}
+
+/* Stats Box */
+.statsSection {
+  background-color: var(--color-grey-soft);
+  border-radius: var(--radius-lg);
+  padding: clamp(1.5rem, 3vw, 2rem);
+  border: 1px solid var(--color-grey-border);
+}
+
+.statsHeader {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 1.5rem;
+}
+
+.statsTitle {
+  font-family: var(--font-display);
+  font-size: 1rem;
+  font-weight: 700;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+}
+
+.statsGrid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 1rem;
+}
+
+.statItem {
+  display: flex;
+  flex-direction: column;
+  gap: 0.25rem;
+}
+
+.statValue {
+  font-family: var(--font-display);
+  font-size: clamp(1.5rem, 2.5vw, 2.25rem);
+  font-weight: 800;
+  line-height: 1;
+  color: var(--color-black);
+}
+
+.statLabel {
+  font-size: 0.75rem;
+  color: var(--color-grey-medium);
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  font-weight: 600;
+}
+
+/* Quick Facts */
+.factsGrid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 1.25rem;
+  padding-top: 1.5rem;
+  border-top: 1px solid var(--color-grey-border);
+}
+
+.factItem {
+  display: flex;
+  flex-direction: column;
+  gap: 0.25rem;
+}
+
+.factLabel {
+  font-size: 0.75rem;
+  color: var(--color-grey-medium);
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  font-weight: 600;
+}
+
+.factValue {
+  font-size: 0.9375rem;
+  font-weight: 600;
+  color: var(--color-black);
+}
+
+/* Responsive */
+@media (max-width: 900px) {
+  .profileGrid {
+    grid-template-columns: 1fr;
+  }
+
+  .imageCard {
+    max-width: 480px;
+    margin: 0 auto;
+    width: 100%;
+  }
+
+  .statsGrid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  .factsGrid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}

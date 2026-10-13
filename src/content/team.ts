@@ -166,4 +166,56 @@ export const squadDemoData: Player[] = [
     joinedYear: 2022,
     dataSource: 'demo',
   },
+  {
+    id: 'kbfc-07',
+    slug: 'milos-drincic',
+    name: 'Miloš Drinčić',
+    shortName: 'M. Drinčić',
+    number: 4,
+    position: 'Defender',
+    nationality: 'Montenegro',
+    nationalityCode: 'ME',
+    photo: {
+      src: 'https://images.unsplash.com/photo-1579952363873-27f3bade9f55?auto=format&fit=crop&w=800&q=80',
+      alt: 'Miloš Drinčić center-back stance',
+      caption: 'Demo asset • Center Back',
+    },
+    bio: [
+      'Commanding central defender known for physical dominance in aerial duels and decisive penalty box clearances.'
+    ],
+    stats: {
+      appearances: 24,
+      goals: 2,
+      cleanSheets: 7,
+      minutesPlayed: 2160,
+    },
+    joinedYear: 2023,
+    dataSource: 'demo',
+  },
+  {
+    id: 'kbfc-08',
+    slug: 'rahul-kp',
+    name: 'Rahul KP',
+    shortName: 'Rahul KP',
+    number: 17,
+    position: 'Forward',
+    nationality: 'India',
+    nationalityCode: 'IN',
+    photo: {
+      src: 'https://images.unsplash.com/photo-1543351611-58f69d7c1781?auto=format&fit=crop&w=800&q=80',
+      alt: 'Rahul KP sprinting down the wing',
+      caption: 'Demo asset • Winger',
+    },
+    bio: [
+      'Thrissur-born speedster offering direct running, tireless wing pressing, and passionate connection with the Kochi crowd.'
+    ],
+    stats: {
+      appearances: 64,
+      goals: 9,
+      assists: 8,
+      minutesPlayed: 4120,
+    },
+    joinedYear: 2019,
+    dataSource: 'demo',
+  },
 ];

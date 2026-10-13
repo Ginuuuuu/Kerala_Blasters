@@ -1,0 +1,83 @@
+.squadSection {
+  width: 100%;
+  padding-top: clamp(3rem, 6vw, 6rem);
+  padding-bottom: clamp(3rem, 6vw, 6rem);
+  background-color: var(--color-white);
+  color: var(--color-black);
+}
+
+.headerBar {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-end;
+  margin-bottom: clamp(2rem, 4vw, 3rem);
+  flex-wrap: wrap;
+  gap: 1.5rem;
+}
+
+.filterTabs {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  flex-wrap: wrap;
+}
+
+.filterPill {
+  font-family: var(--font-body);
+  font-size: 0.8125rem;
+  font-weight: 600;
+  padding: 0.5rem 1.125rem;
+  border-radius: var(--radius-pill);
+  background-color: var(--color-grey-soft);
+  color: var(--color-grey-medium);
+  border: 1px solid transparent;
+  cursor: pointer;
+  transition: all var(--transition-fast);
+}
+
+.filterPill:hover {
+  color: var(--color-black);
+  background-color: #e5e5e5;
+}
+
+.filterPillActive {
+  background-color: var(--color-black);
+  color: var(--color-white);
+}
+
+.filterPillActive:hover {
+  background-color: var(--color-black);
+  color: var(--color-white);
+}
+
+/* Grid Layout */
+.squadGrid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: clamp(1rem, 2vw, 1.75rem);
+}
+
+.footerBar {
+  display: flex;
+  justify-content: center;
+  margin-top: clamp(2.5rem, 5vw, 4rem);
+}
+
+/* Responsive Grid */
+@media (max-width: 1200px) {
+  .squadGrid {
+    grid-template-columns: repeat(3, 1fr);
+  }
+}
+
+@media (max-width: 840px) {
+  .squadGrid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (max-width: 520px) {
+  .squadGrid {
+    grid-template-columns: 1fr;
+  }
+}
