@@ -1,0 +1,279 @@
+.backdrop {
+  position: fixed;
+  inset: 0;
+  z-index: var(--z-nav-panel);
+  background-color: rgba(0, 0, 0, 0.65);
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: clamp(1rem, 3vw, 2.5rem);
+  opacity: 0;
+  visibility: hidden;
+  transition: opacity var(--transition-normal), visibility var(--transition-normal);
+}
+
+.backdropOpen {
+  opacity: 1;
+  visibility: visible;
+}
+
+.panel {
+  width: 100%;
+  max-width: 1100px;
+  max-height: calc(100vh - 2rem);
+  background-color: var(--color-black);
+  color: var(--color-white);
+  border-radius: var(--radius-xl);
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  box-shadow: var(--shadow-modal);
+  overflow-y: auto;
+  display: flex;
+  flex-direction: column;
+  transform: scale(0.96) translateY(12px);
+  transition: transform var(--transition-normal), opacity var(--transition-normal);
+  opacity: 0;
+  position: relative;
+}
+
+.panelOpen {
+  transform: scale(1) translateY(0);
+  opacity: 1;
+}
+
+/* Header inside panel */
+.header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 1.5rem 2rem;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+}
+
+.brand {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  font-family: var(--font-display);
+  font-weight: 700;
+  font-size: 1rem;
+  letter-spacing: 0.05em;
+  color: var(--color-white);
+}
+
+.brandDot {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background-color: var(--color-orange-contrast);
+}
+
+.closeButton {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  padding: 0.625rem 1.125rem;
+  border-radius: var(--radius-pill);
+  background-color: rgba(255, 255, 255, 0.08);
+  color: var(--color-white);
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  font-family: var(--font-body);
+  font-size: 0.8125rem;
+  font-weight: 600;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+  cursor: pointer;
+  transition: all var(--transition-fast);
+  min-height: 44px;
+}
+
+.closeButton:hover {
+  background-color: rgba(255, 255, 255, 0.16);
+  border-color: rgba(255, 255, 255, 0.25);
+  transform: scale(1.02);
+}
+
+/* Body layout: 2 columns on desktop, 1 on mobile */
+.body {
+  display: grid;
+  grid-template-columns: 1.5fr 1fr;
+  gap: 2.5rem;
+  padding: clamp(1.5rem, 4vw, 3rem);
+}
+
+/* Navigation route list */
+.routesList {
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+}
+
+.routeItem {
+  display: flex;
+  align-items: baseline;
+  gap: 1.25rem;
+  padding: 0.75rem 1rem;
+  border-radius: var(--radius-md);
+  text-decoration: none;
+  color: var(--color-white);
+  transition: all var(--transition-fast);
+  position: relative;
+}
+
+.routeItem:hover {
+  background-color: rgba(255, 255, 255, 0.05);
+  transform: translateX(8px);
+}
+
+.routeActive {
+  background-color: rgba(255, 255, 255, 0.06);
+}
+
+.routeActive .routeLabel {
+  color: var(--color-orange-contrast);
+}
+
+.routeNumber {
+  font-family: var(--font-body);
+  font-size: 0.8125rem;
+  font-weight: 500;
+  color: var(--color-grey-medium);
+  letter-spacing: 0.1em;
+  min-width: 2ch;
+}
+
+.routeLabel {
+  font-family: var(--font-display);
+  font-size: clamp(1.5rem, 3.2vw, 2.75rem);
+  font-weight: 700;
+  letter-spacing: -0.02em;
+  text-transform: uppercase;
+  transition: color var(--transition-fast);
+}
+
+.routeBadge {
+  font-family: var(--font-body);
+  font-size: 0.6875rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  padding: 0.2rem 0.6rem;
+  border-radius: var(--radius-pill);
+  background-color: rgba(221, 164, 119, 0.2);
+  color: var(--color-orange-contrast);
+  margin-left: auto;
+  align-self: center;
+}
+
+/* Sidebar info column */
+.sidebar {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  gap: 2rem;
+  padding-left: 2rem;
+  border-left: 1px solid rgba(255, 255, 255, 0.08);
+}
+
+.sidebarCard {
+  background-color: rgba(255, 255, 255, 0.04);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  border-radius: var(--radius-lg);
+  padding: 1.5rem;
+}
+
+.sidebarEyebrow {
+  font-family: var(--font-body);
+  font-size: 0.6875rem;
+  text-transform: uppercase;
+  letter-spacing: 0.12em;
+  color: var(--color-orange-contrast);
+  font-weight: 600;
+  margin-bottom: 0.5rem;
+}
+
+.sidebarTitle {
+  font-family: var(--font-display);
+  font-size: 1.125rem;
+  font-weight: 600;
+  margin-bottom: 0.35rem;
+}
+
+.sidebarDetail {
+  font-size: 0.8125rem;
+  color: var(--color-grey-medium);
+  line-height: 1.5;
+}
+
+.socialSection {
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+}
+
+.socialLabel {
+  font-size: 0.75rem;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  color: var(--color-grey-medium);
+  font-weight: 600;
+}
+
+.socialLinks {
+  display: flex;
+  gap: 0.75rem;
+  flex-wrap: wrap;
+}
+
+.socialButton {
+  padding: 0.5rem 0.875rem;
+  border-radius: var(--radius-pill);
+  background-color: rgba(255, 255, 255, 0.06);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  color: var(--color-white);
+  font-size: 0.75rem;
+  font-weight: 500;
+  transition: all var(--transition-fast);
+  text-decoration: none;
+}
+
+.socialButton:hover {
+  background-color: var(--color-white);
+  color: var(--color-black);
+}
+
+/* Footer disclaimer inside panel */
+.footer {
+  padding: 1rem 2rem;
+  background-color: rgba(0, 0, 0, 0.4);
+  border-top: 1px solid rgba(255, 255, 255, 0.06);
+  font-size: 0.6875rem;
+  color: var(--color-grey-medium);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+}
+
+/* Responsive adjustments */
+@media (max-width: 900px) {
+  .body {
+    grid-template-columns: 1fr;
+    gap: 1.5rem;
+    padding: 1.5rem;
+  }
+
+  .sidebar {
+    padding-left: 0;
+    border-left: none;
+    border-top: 1px solid rgba(255, 255, 255, 0.08);
+    padding-top: 1.5rem;
+  }
+
+  .routeLabel {
+    font-size: 1.5rem;
+  }
+}
