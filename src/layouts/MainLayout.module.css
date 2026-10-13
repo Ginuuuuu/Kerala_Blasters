@@ -1,0 +1,112 @@
+.shell {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  background-color: var(--bg-primary);
+  color: var(--text-primary);
+  position: relative;
+}
+
+.skipLink {
+  position: absolute;
+  top: var(--space-xs);
+  left: var(--space-xs);
+  z-index: 9999;
+  background-color: var(--color-black);
+  color: var(--color-white);
+  padding: 0.5rem 1rem;
+  border-radius: var(--radius-sm);
+  font-weight: 600;
+  transform: translateY(-150%);
+  transition: transform var(--transition-fast);
+}
+
+.skipLink:focus {
+  transform: translateY(0);
+}
+
+.headerPlaceholder {
+  position: fixed;
+  top: 1.5rem;
+  left: 0;
+  right: 0;
+  z-index: var(--z-floating-nav);
+  display: flex;
+  justify-content: center;
+  pointer-events: none;
+}
+
+.navPillPreview {
+  pointer-events: auto;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--space-xl);
+  background-color: rgba(17, 17, 17, 0.95);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  color: var(--color-white);
+  padding: 0.65rem 1.25rem;
+  border-radius: var(--radius-pill);
+  box-shadow: var(--shadow-floating-nav);
+  border: 1px solid rgba(255, 255, 255, 0.15);
+}
+
+.navBrand {
+  font-family: var(--font-display);
+  font-weight: 700;
+  font-size: 0.875rem;
+  letter-spacing: 0.05em;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.navBrandDot {
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background-color: var(--color-orange-contrast);
+}
+
+.navLinksPreview {
+  display: flex;
+  align-items: center;
+  gap: var(--space-md);
+  font-size: 0.8125rem;
+  font-weight: 500;
+}
+
+.navLinksPreview a {
+  opacity: 0.8;
+  transition: opacity var(--transition-fast);
+}
+
+.navLinksPreview a:hover {
+  opacity: 1;
+}
+
+.main {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+}
+
+.footerStub {
+  background-color: var(--color-black);
+  color: var(--color-white);
+  padding: var(--space-2xl) 0 var(--space-xl);
+  border-top: 1px solid var(--border-dark);
+}
+
+.footerBottom {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-size: 0.75rem;
+  color: var(--color-grey-medium);
+  padding-top: var(--space-md);
+  border-top: 1px solid rgba(255, 255, 255, 0.08);
+  flex-wrap: wrap;
+  gap: var(--space-sm);
+}

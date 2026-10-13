@@ -1,0 +1,57 @@
+.badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.375rem;
+  font-family: var(--font-body);
+  font-size: 0.6875rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  padding: 0.25rem 0.625rem;
+  border-radius: var(--radius-pill);
+  line-height: 1;
+}
+
+.variant-default {
+  background-color: var(--color-grey-soft);
+  color: var(--color-black);
+}
+
+.variant-dark {
+  background-color: var(--color-black);
+  color: var(--color-white);
+}
+
+.variant-accent {
+  background-color: rgba(221, 164, 119, 0.18);
+  color: #9c6332;
+  border: 1px solid rgba(221, 164, 119, 0.35);
+}
+
+.variant-live {
+  background-color: #fee2e2;
+  color: #b91c1c;
+}
+
+.liveDot {
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background-color: #ef4444;
+  animation: pulse 1.5s infinite;
+}
+
+@keyframes pulse {
+  0% {
+    transform: scale(0.95);
+    box-shadow: 0 0 0 0 rgba(239, 68, 68, 0.7);
+  }
+  70% {
+    transform: scale(1);
+    box-shadow: 0 0 0 6px rgba(239, 68, 68, 0);
+  }
+  100% {
+    transform: scale(0.95);
+    box-shadow: 0 0 0 0 rgba(239, 68, 68, 0);
+  }
+}

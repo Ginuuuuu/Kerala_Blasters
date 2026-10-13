@@ -1,0 +1,85 @@
+/**
+ * KERALA BLASTERS FC — DESIGN SYSTEM TOKENS
+ * Strict adherence to the approved editorial palette
+ */
+
+:root {
+  /* Approved Palette */
+  --color-white: #FFFFFF;
+  --color-black: #111111;
+  --color-grey-medium: #6B6B6B;
+  --color-grey-soft: #F3F3F3;
+  --color-grey-border: #D9D9D9;
+  --color-orange-contrast: #DDA477;
+  
+  /* Natural Club Accents (Restrained for Kit/Badge representation) */
+  --color-kbfc-yellow: #FFD200;
+  --color-kbfc-blue: #003B7A;
+
+  /* Semantic Interface Tokens */
+  --bg-primary: var(--color-white);
+  --bg-secondary: var(--color-grey-soft);
+  --bg-dark: var(--color-black);
+  
+  --text-primary: var(--color-black);
+  --text-secondary: var(--color-grey-medium);
+  --text-inverse: var(--color-white);
+  --text-accent: var(--color-orange-contrast);
+
+  --border-light: var(--color-grey-border);
+  --border-dark: rgba(255, 255, 255, 0.12);
+  --border-focus: var(--color-orange-contrast);
+
+  /* Typography Families */
+  --font-display: 'Space Grotesk', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+  --font-body: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+  --font-editorial-italic: 'Cormorant Garamond', Georgia, serif;
+  --font-accent: 'Caveat', cursive;
+
+  /* Spacing Scale */
+  --space-2xs: 0.25rem;  /* 4px */
+  --space-xs: 0.5rem;    /* 8px */
+  --space-sm: 0.75rem;   /* 12px */
+  --space-md: 1rem;      /* 16px */
+  --space-lg: 1.5rem;    /* 24px */
+  --space-xl: 2rem;      /* 32px */
+  --space-2xl: 3rem;     /* 48px */
+  --space-3xl: 4.5rem;   /* 72px */
+  --space-4xl: 6rem;     /* 96px */
+  --space-5xl: 8rem;     /* 128px */
+
+  /* Border Radii */
+  --radius-xs: 4px;
+  --radius-sm: 8px;
+  --radius-md: 14px;
+  --radius-lg: 20px;
+  --radius-xl: 28px;
+  --radius-pill: 9999px;
+
+  /* Layout Containers */
+  --container-max: 1440px;
+  --container-wide: 1680px;
+  --container-4k-max: 1920px;
+  --container-padding: clamp(1rem, 4vw, 3.5rem);
+
+  /* Transitions & Easing */
+  --ease-out-editorial: cubic-bezier(0.16, 1, 0.3, 1);
+  --ease-in-out-smooth: cubic-bezier(0.65, 0, 0.35, 1);
+  --transition-fast: 150ms var(--ease-out-editorial);
+  --transition-normal: 300ms var(--ease-out-editorial);
+  --transition-slow: 500ms var(--ease-out-editorial);
+
+  /* Elevation / Shadows */
+  --shadow-subtle: 0 2px 10px rgba(0, 0, 0, 0.04);
+  --shadow-card: 0 10px 30px rgba(0, 0, 0, 0.06);
+  --shadow-floating-nav: 0 20px 40px rgba(0, 0, 0, 0.25);
+  --shadow-modal: 0 30px 60px rgba(0, 0, 0, 0.35);
+
+  /* Z-Index Hierarchy */
+  --z-base: 1;
+  --z-overlay: 10;
+  --z-sticky: 100;
+  --z-floating-nav: 500;
+  --z-nav-panel: 600;
+  --z-modal: 1000;
+}

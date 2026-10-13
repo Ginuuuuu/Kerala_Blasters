@@ -1,0 +1,5 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32" width="32" height="32">
+  <rect width="32" height="32" rx="8" fill="#111111"/>
+  <text x="6" y="22" font-family="'Space Grotesk', -apple-system, sans-serif" font-weight="700" font-size="14" fill="#FFFFFF" letter-spacing="-0.5">KB</text>
+  <circle cx="25" cy="20" r="2.5" fill="#DDA477"/>
+</svg>

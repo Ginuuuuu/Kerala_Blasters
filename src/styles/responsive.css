@@ -1,0 +1,61 @@
+/**
+ * KERALA BLASTERS FC — RESPONSIVE UTILITIES & CONTAINERS
+ * Handles viewport constraints across 1024px, 1280px, 1366px, 1920px, 2K, 4K
+ */
+
+/* Main Max-Width Content Container */
+.site-container {
+  width: 100%;
+  max-width: var(--container-max);
+  margin-left: auto;
+  margin-right: auto;
+  padding-left: var(--container-padding);
+  padding-right: var(--container-padding);
+}
+
+.site-container-wide {
+  width: 100%;
+  max-width: var(--container-wide);
+  margin-left: auto;
+  margin-right: auto;
+  padding-left: var(--container-padding);
+  padding-right: var(--container-padding);
+}
+
+/* Full Width with standard gutters */
+.site-container-fluid {
+  width: 100%;
+  padding-left: var(--container-padding);
+  padding-right: var(--container-padding);
+}
+
+/* 4K UHD Ultra-wide restraint (3840px) */
+@media (min-width: 2560px) {
+  :root {
+    --container-max: 1800px;
+    --container-wide: 2200px;
+    --container-padding: 4rem;
+  }
+}
+
+@media (min-width: 3840px) {
+  :root {
+    --container-max: 2400px;
+    --container-wide: 2800px;
+    --container-padding: 6rem;
+  }
+}
+
+/* Low-height desktop safeguard (e.g. 1024x768 or 1366x768) */
+@media (max-height: 800px) and (min-width: 1024px) {
+  .hero-compact-height {
+    min-height: calc(100vh - 40px);
+  }
+}
+
+/* Mobile & Tablet Adjustments */
+@media (max-width: 768px) {
+  :root {
+    --container-padding: 1.25rem;
+  }
+}

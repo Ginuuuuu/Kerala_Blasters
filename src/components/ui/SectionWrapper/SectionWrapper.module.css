@@ -1,0 +1,52 @@
+.section {
+  position: relative;
+  width: 100%;
+}
+
+.bg-white {
+  background-color: var(--color-white);
+  color: var(--color-black);
+}
+
+.bg-soft {
+  background-color: var(--color-grey-soft);
+  color: var(--color-black);
+}
+
+.bg-black {
+  background-color: var(--color-black);
+  color: var(--color-white);
+}
+
+.padding-none {
+  padding-top: 0;
+  padding-bottom: 0;
+}
+
+.padding-sm {
+  padding-top: var(--space-xl);
+  padding-bottom: var(--space-xl);
+}
+
+.padding-md {
+  padding-top: var(--space-3xl);
+  padding-bottom: var(--space-3xl);
+}
+
+.padding-lg {
+  padding-top: var(--space-4xl);
+  padding-bottom: var(--space-4xl);
+}
+
+.padding-xl {
+  padding-top: var(--space-5xl);
+  padding-bottom: var(--space-5xl);
+}
+
+.border-top {
+  border-top: 1px solid var(--color-grey-border);
+}
+
+.border-bottom {
+  border-bottom: 1px solid var(--color-grey-border);
+}

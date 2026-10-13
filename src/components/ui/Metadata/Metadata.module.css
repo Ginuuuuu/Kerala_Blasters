@@ -1,0 +1,43 @@
+.metadata {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: var(--space-xs);
+  font-family: var(--font-body);
+  font-size: 0.8125rem;
+  line-height: 1.4;
+}
+
+.item {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.25rem;
+}
+
+.icon {
+  display: flex;
+  align-items: center;
+  font-size: 0.9em;
+  opacity: 0.8;
+}
+
+.label {
+  opacity: 0.7;
+}
+
+.divider {
+  opacity: 0.4;
+  user-select: none;
+}
+
+.variant-muted {
+  color: var(--text-secondary);
+}
+
+.variant-dark {
+  color: rgba(255, 255, 255, 0.7);
+}
+
+.variant-light {
+  color: var(--text-primary);
+}
