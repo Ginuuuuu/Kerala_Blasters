@@ -1,5 +1,7 @@
 .heroSection {
-  position: relative;
+  position: sticky;
+  top: 0;
+  z-index: var(--z-base);
   width: 100%;
   min-height: 100vh;
   min-height: 100svh;

@@ -1,6 +1,6 @@
 import React from 'react';
-import { Container, Heading, SectionWrapper } from '@/components/ui';
 import { HeroSection } from '@/components/hero';
+import { OverlappingIntro } from '@/components/standsFor';
 
 export const HomePage: React.FC = () => {
   return (
@@ -8,18 +8,8 @@ export const HomePage: React.FC = () => {
       {/* Major Visual Milestone: Phase 2 Hero Section */}
       <HeroSection />
 
-      <SectionWrapper bg="white" padding="lg">
-        <Container>
-          <Heading
-            level="h2"
-            displayStyle="section"
-            eyebrow="Foundation Status"
-            subtitle="The application foundation, design tokens, typed models, and routing are established."
-          >
-            Design System <span className="text-editorial-italic">Ready</span>
-          </Heading>
-        </Container>
-      </SectionWrapper>
+      {/* Major Visual Milestone: Phase 3 Overlapping Intro & Horizontal Carousel */}
+      <OverlappingIntro />
     </div>
   );
 };
