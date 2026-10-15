@@ -103,11 +103,11 @@ export const NavPanel: React.FC<NavPanelProps> = ({
             aria-label="Close navigation menu"
           >
             <span>Close</span>
-            <X size={16} aria-hidden="true" />
+            <X size={14} aria-hidden="true" />
           </button>
         </div>
 
-        {/* Body */}
+        {/* Compact Body */}
         <div className={styles.body}>
           {/* Main Links */}
           <nav className={styles.routesList} aria-label="Expanded Navigation">
@@ -128,12 +128,8 @@ export const NavPanel: React.FC<NavPanelProps> = ({
                     <span className={styles.routeBadge}>{route.badge}</span>
                   )}
                   <ArrowRight
-                    size={20}
-                    style={{
-                      marginLeft: 'auto',
-                      opacity: isActive ? 1 : 0.4,
-                      color: isActive ? 'var(--color-orange-contrast)' : 'inherit',
-                    }}
+                    size={16}
+                    className={styles.routeArrow}
                     aria-hidden="true"
                   />
                 </Link>
@@ -141,47 +137,34 @@ export const NavPanel: React.FC<NavPanelProps> = ({
             })}
           </nav>
 
-          {/* Sidebar Highlight */}
-          <div className={styles.sidebar}>
-            <div className={styles.sidebarCard}>
-              <div className={styles.sidebarEyebrow}>Next Matchday</div>
-              <div className={styles.sidebarTitle}>KBFC vs Bengaluru FC</div>
-              <div className={styles.sidebarDetail}>
-                Jawaharlal Nehru Stadium, Kochi • Sunday 19:30 IST
-              </div>
-              <Link
-                to="/matches"
-                onClick={onClose}
-                style={{
-                  display: 'inline-flex',
-                  alignItems: 'center',
-                  gap: '0.35rem',
-                  fontSize: '0.8125rem',
-                  color: 'var(--color-orange-contrast)',
-                  fontWeight: 600,
-                  marginTop: '0.75rem',
-                }}
-              >
-                <span>View Match Centre</span>
-                <ArrowRight size={14} aria-hidden="true" />
-              </Link>
+          {/* Compact Next Matchday Preview Card */}
+          <div className={styles.matchCard}>
+            <div className={styles.matchEyebrow}>Next Matchday</div>
+            <div className={styles.matchTitle}>KBFC vs Bengaluru FC</div>
+            <div className={styles.matchDetail}>
+              Jawaharlal Nehru Stadium, Kochi • Sun 19:30 IST
             </div>
+            <Link to="/matches" onClick={onClose} className={styles.matchLink}>
+              <span>Match Centre</span>
+              <ArrowRight size={12} aria-hidden="true" />
+            </Link>
+          </div>
 
-            <div className={styles.socialSection}>
-              <span className={styles.socialLabel}>Follow the Yellow Army</span>
-              <div className={styles.socialLinks}>
-                {navigationContent.socials.map((social) => (
-                  <a
-                    key={social.platform}
-                    href={social.url}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className={styles.socialButton}
-                  >
-                    {social.platform}
-                  </a>
-                ))}
-              </div>
+          {/* Social Pills */}
+          <div className={styles.socialSection}>
+            <span className={styles.socialLabel}>Socials</span>
+            <div className={styles.socialLinks}>
+              {navigationContent.socials.map((social) => (
+                <a
+                  key={social.platform}
+                  href={social.url}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className={styles.socialButton}
+                >
+                  {social.platform}
+                </a>
+              ))}
             </div>
           </div>
         </div>
@@ -189,7 +172,7 @@ export const NavPanel: React.FC<NavPanelProps> = ({
         {/* Footer */}
         <div className={styles.footer}>
           <span>{navigationContent.brand.subtext}</span>
-          <span>{navigationContent.legalNotice}</span>
+          <span>Concept Website</span>
         </div>
       </div>
     </div>
