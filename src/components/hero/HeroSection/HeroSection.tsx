@@ -61,6 +61,9 @@ export const HeroSection: React.FC<HeroSectionProps> = ({
             decoding="async"
             fetchPriority="high"
             className={styles.mediaItem}
+            onError={(e) => {
+              e.currentTarget.src = '/images/hero-stadium.svg';
+            }}
           />
         )}
 

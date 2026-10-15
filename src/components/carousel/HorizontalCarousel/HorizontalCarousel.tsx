@@ -174,6 +174,9 @@ export const HorizontalCarousel: React.FC<HorizontalCarouselProps> = ({
                 loading="lazy"
                 decoding="async"
                 className={styles.cardImage}
+                onError={(e) => {
+                  e.currentTarget.src = '/images/culture-placeholder.svg';
+                }}
               />
               <div className={styles.cardOverlay} aria-hidden="true" />
             </div>

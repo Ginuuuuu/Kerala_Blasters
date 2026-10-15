@@ -1,13 +1,9 @@
 .overlappingSection {
   position: relative;
-  z-index: var(--z-overlay);
   background-color: var(--color-white);
   color: var(--color-black);
-  border-top-left-radius: clamp(1.75rem, 4vw, 3.5rem);
-  border-top-right-radius: clamp(1.75rem, 4vw, 3.5rem);
-  box-shadow: 0 -25px 60px rgba(0, 0, 0, 0.3);
-  padding-top: clamp(3rem, 6vw, 6rem);
-  padding-bottom: clamp(4rem, 8vw, 7rem);
+  padding-top: clamp(3.5rem, 6vw, 6rem);
+  padding-bottom: clamp(3.5rem, 6vw, 6rem);
   width: 100%;
 }
 

@@ -24,6 +24,9 @@ export const PlayerCard: React.FC<PlayerCardProps> = ({ player, className }) => 
           loading="lazy"
           decoding="async"
           className={styles.image}
+          onError={(e) => {
+            e.currentTarget.src = '/images/player-placeholder.svg';
+          }}
         />
         <div className={styles.overlay} aria-hidden="true" />
       </div>

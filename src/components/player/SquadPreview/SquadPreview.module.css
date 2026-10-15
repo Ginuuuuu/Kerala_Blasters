@@ -1,4 +1,5 @@
 .squadSection {
+  position: relative;
   width: 100%;
   padding-top: clamp(3rem, 6vw, 6rem);
   padding-bottom: clamp(3rem, 6vw, 6rem);

@@ -1,4 +1,5 @@
 import React from 'react';
+import styles from './HomePage.module.css';
 import { HeroSection } from '@/components/hero';
 import { OverlappingIntro } from '@/components/standsFor';
 import { SquadPreview } from '@/components/player';
@@ -6,18 +7,23 @@ import { FootballQuote } from '@/components/quote';
 
 export const HomePage: React.FC = () => {
   return (
-    <div>
-      {/* Major Visual Milestone: Phase 2 Hero Section */}
-      <HeroSection />
+    <div className={styles.homeRoot}>
+      {/* Sticky Hero Container — strictly isolated to viewport height */}
+      <div className={styles.heroStickyWrapper}>
+        <HeroSection />
+      </div>
 
-      {/* Major Visual Milestone: Phase 3 Overlapping Intro & Horizontal Carousel */}
-      <OverlappingIntro />
+      {/* Opaque Content Surface that slides over the sticky hero on scroll */}
+      <div className={styles.contentSurface}>
+        {/* Phase 3: Overlapping Intro & Horizontal Carousel */}
+        <OverlappingIntro />
 
-      {/* Major Visual Milestone: Phase 4 First Team / The Squad */}
-      <SquadPreview />
+        {/* Phase 4: First Team / The Squad */}
+        <SquadPreview />
 
-      {/* Major Visual Milestone: Phase 5 Short Football Quote */}
-      <FootballQuote />
+        {/* Phase 5: Short Football Quote */}
+        <FootballQuote />
+      </div>
     </div>
   );
 };
