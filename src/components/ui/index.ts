@@ -6,3 +6,4 @@ export * from './ImageFrame/ImageFrame';
 export * from './Card/Card';
 export * from './SectionWrapper/SectionWrapper';
 export * from './Metadata/Metadata';
+export * from './ScrollMaskedText/ScrollMaskedText';

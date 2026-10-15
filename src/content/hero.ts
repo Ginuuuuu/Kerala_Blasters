@@ -39,12 +39,12 @@ export const heroContent: HeroContent = {
   media: {
     type: 'image',
     poster: {
-      src: 'https://images.unsplash.com/photo-1508098682722-e99c43a406b2?auto=format&fit=crop&w=2400&q=85',
+      src: '/Assets/Hero01.jpg',
       alt: 'Kerala Blasters match atmosphere under stadium floodlights',
-      caption: 'Demo asset • High-res editorial football scene',
+      caption: 'Kerala Blasters FC • Editorial matchday visual',
     },
-    // Optional video slot prepared without requiring an invented asset
-    videoUrl: undefined,
+    // Hero02 background video loop
+    videoUrl: '/Assets/Hero02.mp4',
   },
   scrollCueText: 'Scroll to explore',
 };

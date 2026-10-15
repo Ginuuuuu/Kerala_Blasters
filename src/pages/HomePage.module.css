@@ -1,28 +1,64 @@
 .homeRoot {
   position: relative;
   width: 100%;
-  background-color: var(--color-black);
+  background-color: var(--color-black, #080808);
 }
 
-/* Sticky Hero Container */
+/* 1. First Banner: Sticky Hero (Hero01 -> Boot Camp -> Hero02 Video) */
 .heroStickyWrapper {
+  position: relative;
+  z-index: 10;
+  width: 100%;
+}
+
+/* 2. Second Banner: Overlapping Intro ("QUIETLY COOKED" + Honours)
+   Slides up over Hero02, then stays PINNED at top: 0 while Hero03 overlaps it */
+.standForBannerLayer {
   position: sticky;
   top: 0;
-  z-index: var(--z-base);
+  z-index: 20;
   width: 100%;
   height: 100vh;
   height: 100svh;
+  box-shadow: 0 -25px 60px rgba(0, 0, 0, 0.4);
+  background-color: var(--color-white, #ffffff);
   overflow: hidden;
+  box-sizing: border-box;
 }
 
-/* Main Content Surface that rises over the hero on scroll */
-.contentSurface {
-  position: relative;
-  z-index: var(--z-overlay);
-  background-color: var(--color-white);
-  border-top-left-radius: clamp(1.75rem, 4vw, 3.5rem);
-  border-top-right-radius: clamp(1.75rem, 4vw, 3.5rem);
-  box-shadow: 0 -25px 60px rgba(0, 0, 0, 0.35);
+/* 3. Third Banner: Hero03 Banner (The Squad in sharp formal suits)
+   Slides up directly OVER OverlappingIntro based on scroll */
+.hero03BannerLayer {
+  position: sticky;
+  top: 0;
+  z-index: 30;
   width: 100%;
+  height: 100vh;
+  height: 100svh;
+  box-shadow: 0 -30px 70px rgba(0, 0, 0, 0.5);
+  background-color: #0c0c0c;
   overflow: hidden;
+  box-sizing: border-box;
+}
+
+/* 4. Fourth Banner: White Page with Title & Sailors (Reserved Content Stage)
+   Slides up directly OVER Hero03 banner based on scroll */
+.sailorsBannerLayer {
+  position: relative;
+  z-index: 35;
+  width: 100%;
+  height: 100vh;
+  height: 100svh;
+  box-shadow: 0 -25px 60px rgba(0, 0, 0, 0.4);
+  background-color: var(--color-white, #ffffff);
+  overflow: hidden;
+  box-sizing: border-box;
+}
+
+/* 5. Subsequent Content Surface (Quote, Roadmap, etc.) - Normal Scroll Flow */
+.subsequentSurface {
+  position: relative;
+  z-index: 45;
+  width: 100%;
+  background-color: var(--color-white, #ffffff);
 }

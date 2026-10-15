@@ -1,320 +1,459 @@
-.roadmapWrapper {
+/* ==========================================================================
+   Kerala Blasters FC — Pure Typographic Stepped Multidirectional Roadmap
+   NO CARDS — Minimal Floating Typography Attached Directly to Stalks & Dots
+   Matching Reference: Horizontal (2014-2022) -> Straight Downward (2022-2025) -> Straight Sideward (2025-2026+)
+   ========================================================================== */
+
+/* Main Pinned Scroll Section (Lengthy Travel) */
+.journeySection {
   position: relative;
   width: 100%;
-  background-color: var(--color-white);
-  color: var(--color-black);
-  padding-top: clamp(4rem, 7vw, 7rem);
-  padding-bottom: clamp(4rem, 7vw, 7rem);
-  border-top: 1px solid var(--color-grey-border);
-  overflow: hidden;
+  height: clamp(4800px, 320vw, 6200px);
+  background-color: var(--color-white, #ffffff);
+  color: var(--color-black, #111111);
 }
 
-/* Pinned Viewport Container */
-.pinContainer {
+/* Pinned Viewport Stage — Pinned by GSAP ScrollTrigger */
+.stickyStage {
+  position: relative;
   width: 100%;
   height: 100vh;
   height: 100svh;
+  min-height: 600px;
+  max-height: 1080px;
+  background-color: var(--color-white, #ffffff);
+  overflow: hidden;
+  box-sizing: border-box;
+}
+
+/* --------------------------------------------------------------------------
+   1. White-Themed Intro Overlay (Fully visible by default, holds steady, then fades out slowly)
+   -------------------------------------------------------------------------- */
+.introOverlay {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
   display: flex;
   flex-direction: column;
   justify-content: center;
-  position: relative;
-  overflow: hidden;
-}
-
-/* Header within Pinned Area */
-.headerBar {
-  display: flex;
-  justify-content: space-between;
-  align-items: flex-end;
-  margin-bottom: clamp(2rem, 4vh, 3.5rem);
-  flex-wrap: wrap;
-  gap: 1.5rem;
-}
-
-.headingGroup {
-  max-width: 600px;
-}
-
-.dateBadge {
-  font-family: var(--font-body);
-  font-size: 0.8125rem;
-  font-weight: 700;
-  letter-spacing: 0.1em;
-  color: var(--color-orange-contrast);
-  background-color: rgba(221, 164, 119, 0.15);
-  border: 1px solid rgba(221, 164, 119, 0.3);
-  padding: 0.4rem 0.85rem;
-  border-radius: var(--radius-pill);
-}
-
-/* Horizontal Track (Animated via GSAP ScrollTrigger) */
-.timelineTrackWrapper {
-  position: relative;
-  width: 100%;
-  overflow: hidden;
-}
-
-.timelineTrack {
-  display: flex;
   align-items: center;
-  gap: clamp(3rem, 6vw, 6rem);
-  width: max-content;
-  position: relative;
-  padding-left: clamp(2rem, 5vw, 6rem);
-  padding-right: clamp(10rem, 20vw, 25rem);
+  text-align: center;
+  padding: clamp(4.5rem, 8vh, 6.5rem) 1.5rem 2rem 1.5rem;
+  background-color: var(--color-white, #ffffff);
+  color: var(--color-black, #111111);
+  z-index: 20;
+  box-sizing: border-box;
+  opacity: 1;
+  visibility: visible;
+  will-change: opacity, transform;
 }
 
-/* Visual Spine / Line */
-.timelineSpineBase {
+.introContent {
+  max-width: 820px;
+  margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  will-change: transform, opacity;
+}
+
+.introEyebrow {
+  font-family: var(--font-mono, monospace);
+  font-size: clamp(0.75rem, 0.9vw, 0.875rem);
+  font-weight: 600;
+  letter-spacing: 0.24em;
+  text-transform: uppercase;
+  color: var(--color-grey-medium, #6b6b6b);
+  margin-bottom: clamp(1.25rem, 3vh, 2rem);
+  display: inline-block;
+}
+
+.introTitle {
+  font-family: var(--font-display, "Space Grotesk", sans-serif);
+  font-size: clamp(2.5rem, 5.8vw, 5rem);
+  font-weight: 700;
+  line-height: 1.06;
+  letter-spacing: -0.03em;
+  color: var(--color-black, #111111);
+  margin: 0 0 clamp(1.25rem, 2.5vh, 1.75rem) 0;
+  white-space: pre-line;
+}
+
+.introSubtitle {
+  font-family: var(--font-body, "Inter", sans-serif);
+  font-size: clamp(0.9375rem, 1.25vw, 1.1875rem);
+  line-height: 1.6;
+  color: var(--color-grey-medium, #6b6b6b);
+  max-width: 640px;
+  margin: 0 auto;
+}
+
+.introArrow {
+  font-size: 1.5rem;
+  color: var(--color-grey-medium, #6b6b6b);
+  margin-top: clamp(1.75rem, 4vh, 2.75rem);
+  display: inline-block;
+  animation: floatArrow 2.2s ease-in-out infinite;
+  user-select: none;
+}
+
+@keyframes floatArrow {
+  0%, 100% {
+    transform: translateY(0);
+    opacity: 0.5;
+  }
+  50% {
+    transform: translateY(8px);
+    opacity: 1;
+  }
+}
+
+/* --------------------------------------------------------------------------
+   2. Stepped 2D Canvas & Directional Tracking Stage
+   -------------------------------------------------------------------------- */
+.viewportStage {
   position: absolute;
-  top: 50%;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+  opacity: 0;
+  visibility: hidden;
+  z-index: 2;
+  will-change: opacity;
+}
+
+/* Stepped World Canvas: 2950px wide x 1300px tall */
+.steppedWorld {
+  position: absolute;
   left: 0;
-  right: 0;
-  height: 2px;
-  background-color: var(--color-grey-border);
-  transform: translateY(-50%);
+  top: 0;
+  width: 2950px;
+  height: 1300px;
+  will-change: transform;
+}
+
+/* SVG Line Layer */
+.svgLayer {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
   z-index: 1;
 }
 
-.timelineSpineActive {
-  position: absolute;
-  top: 50%;
-  left: 0;
-  height: 3px;
-  background-color: var(--color-orange-contrast);
-  transform: translateY(-50%);
-  z-index: 2;
-  width: 0%;
-  transition: width 0.1s ease-out;
+/* Base Guide Path (Subtle dashed grey) */
+.pathBase {
+  fill: none;
+  stroke: #eaeaea;
+  stroke-width: 2.5;
+  stroke-dasharray: 6 6;
+  stroke-linecap: square;
+  stroke-linejoin: miter;
 }
 
-/* Left Hero Feature Badge */
-.featureLeadCard {
-  flex: 0 0 clamp(260px, 24vw, 340px);
-  aspect-ratio: 4 / 5;
-  border-radius: var(--radius-xl);
+/* Active Scrub Path (Muted Orange) - Straight orthogonal line, no curves */
+.pathActive {
+  fill: none;
+  stroke: var(--color-orange-contrast, #dda477);
+  stroke-width: 3.5;
+  stroke-linecap: square;
+  stroke-linejoin: miter;
+}
+
+/* --------------------------------------------------------------------------
+   3. Lead Hero Stadium Card (Starts the journey)
+   -------------------------------------------------------------------------- */
+.leadCard {
+  position: absolute;
+  left: 60px;
+  top: 240px;
+  width: 280px;
+  height: 360px;
+  border-radius: 18px;
   overflow: hidden;
-  position: relative;
-  background-color: var(--color-black);
-  color: var(--color-white);
-  box-shadow: var(--shadow-card);
-  border: 1px solid rgba(0, 0, 0, 0.1);
+  box-shadow: 0 20px 45px rgba(0, 0, 0, 0.12);
+  background-color: #111111;
   z-index: 3;
 }
 
-.featureImage {
-  position: absolute;
-  inset: 0;
+.leadImg {
   width: 100%;
   height: 100%;
   object-fit: cover;
-  opacity: 0.45;
+  display: block;
 }
 
-.featureOverlay {
+.leadOverlay {
   position: absolute;
   inset: 0;
-  background: linear-gradient(180deg, rgba(17, 17, 17, 0.2) 0%, rgba(17, 17, 17, 0.95) 100%);
-}
-
-.featureContent {
-  position: relative;
-  z-index: 2;
-  height: 100%;
-  display: flex;
-  flex-direction: column;
-  justify-content: space-between;
-  padding: 1.75rem;
-}
-
-/* Milestone Nodes */
-.milestoneNode {
-  position: relative;
-  z-index: 3;
-  flex: 0 0 clamp(280px, 25vw, 360px);
-  display: flex;
-  flex-direction: column;
-  transition: transform var(--transition-normal);
-}
-
-/* Alternating Alignment */
-.nodeTop {
-  padding-bottom: clamp(3rem, 5vh, 4.5rem);
-}
-
-.nodeBottom {
-  padding-top: clamp(3rem, 5vh, 4.5rem);
-  margin-top: auto;
-}
-
-/* Center Marker Node on Line */
-.markerWrapper {
-  position: absolute;
-  left: 1.5rem;
-  width: 24px;
-  height: 24px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-}
-
-.markerWrapperTop {
-  bottom: -12px;
-}
-
-.markerWrapperBottom {
-  top: -12px;
-}
-
-.markerDot {
-  width: 14px;
-  height: 14px;
-  border-radius: 50%;
-  background-color: var(--color-white);
-  border: 3px solid var(--color-grey-border);
-  transition: all var(--transition-fast);
-}
-
-.markerDotActive {
-  background-color: var(--color-orange-contrast);
-  border-color: var(--color-black);
-  transform: scale(1.25);
-  box-shadow: 0 0 0 4px rgba(221, 164, 119, 0.3);
-}
-
-/* Milestone Card Surface */
-.milestoneCard {
-  background-color: var(--color-grey-soft);
-  border: 1px solid var(--color-grey-border);
-  border-radius: var(--radius-lg);
-  padding: clamp(1.25rem, 2vw, 1.75rem);
-  transition: transform var(--transition-fast), border-color var(--transition-fast), box-shadow var(--transition-fast);
-  position: relative;
-}
-
-.milestoneCard:hover {
-  border-color: var(--color-black);
-  box-shadow: var(--shadow-subtle);
-  transform: translateY(-4px);
-}
-
-.milestoneCardActive {
-  border-color: var(--color-orange-contrast);
-  background-color: var(--color-white);
-  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.08);
-}
-
-.cardHeader {
-  display: flex;
-  justify-content: space-between;
-  align-items: baseline;
-  margin-bottom: 0.5rem;
-}
-
-.yearText {
-  font-family: var(--font-display);
-  font-size: clamp(1.5rem, 2.5vw, 2.25rem);
-  font-weight: 800;
-  line-height: 1;
-  color: var(--color-black);
-}
-
-.categoryTag {
-  font-family: var(--font-body);
-  font-size: 0.6875rem;
-  font-weight: 700;
-  text-transform: uppercase;
-  letter-spacing: 0.1em;
-  color: var(--color-grey-medium);
-}
-
-.milestoneTitle {
-  font-family: var(--font-display);
-  font-size: 1.125rem;
-  font-weight: 700;
-  line-height: 1.25;
-  color: var(--color-black);
-  margin-bottom: 0.5rem;
-}
-
-.milestoneDesc {
-  font-family: var(--font-body);
-  font-size: 0.8125rem;
-  line-height: 1.55;
-  color: var(--color-grey-medium);
-}
-
-.milestoneStat {
-  display: flex;
-  align-items: baseline;
-  gap: 0.5rem;
-  margin-top: 1rem;
-  padding-top: 0.75rem;
-  border-top: 1px solid rgba(0, 0, 0, 0.06);
-}
-
-.statValue {
-  font-family: var(--font-display);
-  font-size: 1.125rem;
-  font-weight: 800;
-  color: var(--color-orange-contrast);
-}
-
-.statLabel {
-  font-size: 0.6875rem;
-  text-transform: uppercase;
-  letter-spacing: 0.05em;
-  color: var(--color-grey-medium);
-  font-weight: 600;
-}
-
-/* Static Accessible Fallback (when reduced-motion is enabled or mobile) */
-.accessibleFallback {
-  display: flex;
-  flex-direction: column;
-  gap: 1.5rem;
-  width: 100%;
-}
-
-.accessibleCard {
-  background-color: var(--color-grey-soft);
-  border: 1px solid var(--color-grey-border);
-  border-radius: var(--radius-md);
+  background: linear-gradient(
+    180deg,
+    rgba(17, 17, 17, 0.1) 0%,
+    rgba(17, 17, 17, 0.55) 45%,
+    rgba(17, 17, 17, 0.95) 100%
+  );
   padding: 1.5rem;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  color: #ffffff;
 }
 
-/* Responsive adjustments */
-@media (max-width: 900px) {
-  .pinContainer {
+.leadPill {
+  align-self: flex-start;
+  font-family: var(--font-body, "Inter", sans-serif);
+  font-size: 0.6875rem;
+  font-weight: 700;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  background-color: var(--color-orange-contrast, #dda477);
+  color: #111111;
+  padding: 0.25rem 0.65rem;
+  border-radius: 9999px;
+}
+
+.leadHeadline {
+  font-family: var(--font-display, "Space Grotesk", sans-serif);
+  font-size: 1.25rem;
+  font-weight: 700;
+  line-height: 1.2;
+}
+
+/* --------------------------------------------------------------------------
+   4. Pure Typographic Milestones (NO CARDS — Matching Reference)
+   -------------------------------------------------------------------------- */
+.milestoneAnchor {
+  position: absolute;
+  z-index: 4;
+}
+
+/* Stalk Connector Line (Vertical or Horizontal) */
+.stemLine {
+  position: absolute;
+  background-color: var(--color-orange-contrast, #dda477);
+  will-change: transform;
+}
+
+.stemVerticalUp {
+  left: 0;
+  bottom: 0;
+  width: 2px;
+  height: 110px;
+  transform-origin: bottom center;
+}
+
+.stemVerticalDown {
+  left: 0;
+  top: 0;
+  width: 2px;
+  height: 110px;
+  transform-origin: top center;
+}
+
+.stemHorizontalRight {
+  left: 0;
+  top: 0;
+  height: 2px;
+  width: 60px;
+  transform-origin: left center;
+}
+
+.stemHorizontalLeft {
+  right: 0;
+  top: 0;
+  height: 2px;
+  width: 60px;
+  transform-origin: right center;
+}
+
+/* Orange Dot sitting at the end of the stem right next to the title */
+.markerDot {
+  position: absolute;
+  width: 12px;
+  height: 12px;
+  border-radius: 50%;
+  background-color: var(--color-orange-contrast, #dda477);
+  border: 2px solid #ffffff;
+  box-shadow: 0 0 10px rgba(221, 164, 119, 0.8);
+  will-change: transform;
+}
+
+.dotTop {
+  left: 1px;
+  bottom: 110px;
+  transform: translate(-50%, 50%);
+}
+
+.dotBottom {
+  left: 1px;
+  top: 110px;
+  transform: translate(-50%, -50%);
+}
+
+.dotRight {
+  left: 60px;
+  top: 1px;
+  transform: translate(-50%, -50%);
+}
+
+.dotLeft {
+  right: 60px;
+  top: 1px;
+  transform: translate(50%, -50%);
+}
+
+/* Pure Floating Typography Block (NO BOX, NO BORDER, NO SHADOW) */
+.textGroup {
+  position: absolute;
+  width: 340px;
+  will-change: opacity, transform;
+}
+
+/* Alignments relative to stalk */
+.textAbove {
+  bottom: 110px;
+  left: 22px;
+  transform: translateY(50%);
+}
+
+.textBelow {
+  top: 110px;
+  left: 22px;
+  transform: translateY(-50%);
+}
+
+.textRight {
+  left: 78px;
+  top: 0;
+  transform: translateY(-50%);
+}
+
+.textLeft {
+  right: 78px;
+  top: 0;
+  transform: translateY(-50%);
+  text-align: right;
+}
+
+/* Title: 2020 March / 2014 May style */
+.itemTitle {
+  font-family: var(--font-display, "Space Grotesk", sans-serif);
+  font-size: clamp(1.5rem, 1.85vw, 2.125rem);
+  font-weight: 700;
+  line-height: 1.1;
+  letter-spacing: -0.02em;
+  color: var(--color-black, #111111);
+  margin: 0 0 0.4rem 0;
+}
+
+/* Local Malayalam Slang Quote */
+.itemQuote {
+  font-family: var(--font-display, "Space Grotesk", sans-serif);
+  font-size: 0.875rem;
+  font-weight: 600;
+  font-style: italic;
+  line-height: 1.35;
+  color: #c2410c;
+  margin-bottom: 0.35rem;
+}
+
+/* Concise Editorial Description */
+.itemDescription {
+  font-family: var(--font-body, "Inter", sans-serif);
+  font-size: 0.9375rem;
+  line-height: 1.5;
+  color: #27272a;
+  margin: 0;
+}
+
+/* --------------------------------------------------------------------------
+   Mobile & Tablet Fallback
+   -------------------------------------------------------------------------- */
+@media (max-width: 768px) {
+  .journeySection {
     height: auto;
-    padding-top: 2rem;
-    padding-bottom: 2rem;
+    overflow: visible;
   }
 
-  .timelineTrack {
-    overflow-x: auto;
-    scroll-snap-type: x mandatory;
-    padding-left: 1rem;
-    padding-right: 2rem;
-    padding-bottom: 1.5rem;
+  .stickyStage {
+    position: relative;
+    height: auto;
+    min-height: unset;
+    overflow: visible;
   }
 
-  .milestoneNode {
-    flex: 0 0 85vw;
-    scroll-snap-align: start;
+  .introOverlay {
+    position: relative;
+    height: auto;
+    padding: 5rem 1.25rem 3rem 1.25rem;
+    opacity: 1 !important;
+    visibility: visible !important;
+    transform: none !important;
   }
 
-  .timelineSpineBase,
-  .timelineSpineActive {
+  .viewportStage {
+    position: relative;
+    height: auto;
+    opacity: 1 !important;
+    visibility: visible !important;
+    overflow: visible;
+    padding: 1.5rem;
+  }
+
+  .steppedWorld {
+    position: relative;
+    width: 100%;
+    height: auto;
+    transform: none !important;
+    display: flex;
+    flex-direction: column;
+    gap: 2.5rem;
+  }
+
+  .svgLayer {
     display: none;
   }
 
-  .markerWrapper {
+  .leadCard {
+    position: relative;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 240px;
+  }
+
+  .milestoneAnchor {
+    position: relative;
+    left: 0 !important;
+    top: 0 !important;
+    width: 100%;
+  }
+
+  .stemLine {
     display: none;
   }
 
-  .nodeTop, .nodeBottom {
-    padding-top: 0;
-    padding-bottom: 0;
+  .markerDot {
+    position: static;
+    display: inline-block;
+    margin-bottom: 0.5rem;
+    transform: none !important;
+  }
+
+  .textGroup {
+    position: relative;
+    left: 0 !important;
+    right: 0 !important;
+    top: 0 !important;
+    bottom: 0 !important;
+    width: 100%;
+    transform: none !important;
+    opacity: 1 !important;
+    border-left: 2px solid var(--color-orange-contrast, #dda477);
+    padding-left: 1.25rem;
+    text-align: left !important;
   }
 }

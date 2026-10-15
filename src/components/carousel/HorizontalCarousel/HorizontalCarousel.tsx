@@ -1,9 +1,9 @@
 import React, { useRef, useState, useEffect, useCallback } from 'react';
-import { ChevronLeft, ChevronRight } from 'lucide-react';
 import styles from './HorizontalCarousel.module.css';
 import { cn } from '@/utils/classNames';
 import { standsForContent, StandsForContent } from '@/content/standsFor';
 import { useReducedMotion } from '@/hooks/useReducedMotion';
+import { ScrollMaskedText } from '@/components/ui';
 
 export interface HorizontalCarouselProps {
   content?: StandsForContent;
@@ -16,8 +16,6 @@ export const HorizontalCarousel: React.FC<HorizontalCarouselProps> = ({
 }) => {
   const scrollRef = useRef<HTMLDivElement>(null);
   const [activeIndex, setActiveIndex] = useState(0);
-  const [canScrollLeft, setCanScrollLeft] = useState(false);
-  const [canScrollRight, setCanScrollRight] = useState(true);
   const prefersReducedMotion = useReducedMotion();
 
   // Update scroll boundaries and active slide index
@@ -25,9 +23,7 @@ export const HorizontalCarousel: React.FC<HorizontalCarouselProps> = ({
     const el = scrollRef.current;
     if (!el) return;
 
-    const { scrollLeft, scrollWidth, clientWidth } = el;
-    setCanScrollLeft(scrollLeft > 10);
-    setCanScrollRight(scrollLeft < scrollWidth - clientWidth - 10);
+    const { scrollLeft } = el;
 
     // Calculate approximate active card index
     const cardWidth = el.firstElementChild?.clientWidth || 320;
@@ -100,53 +96,14 @@ export const HorizontalCarousel: React.FC<HorizontalCarouselProps> = ({
             {content.eyebrow}
           </div>
           <h2 className="text-display-section" style={{ color: 'var(--color-black)' }}>
-            {content.titleMain}{' '}
-            <span className="text-editorial-italic">{content.titleItalic}</span>
+            <ScrollMaskedText theme="light" showHairline={false}>
+              {content.titleMain}{' '}
+              <span className="text-editorial-italic">{content.titleItalic}</span>
+            </ScrollMaskedText>
           </h2>
           <p className="text-body" style={{ color: 'var(--color-grey-medium)', marginTop: '0.75rem' }}>
             {content.subtitle}
           </p>
-        </div>
-
-        {/* Navigation Controls */}
-        <div className={styles.controlsGroup}>
-          {/* Indicator Pills */}
-          <div className={styles.indicators} aria-hidden="true">
-            {content.cards.map((card, i) => (
-              <button
-                key={card.id}
-                type="button"
-                className={cn(
-                  styles.indicatorDot,
-                  i === activeIndex && styles.indicatorDotActive
-                )}
-                onClick={() => scrollToIndex(i)}
-                aria-label={`Go to slide ${i + 1}`}
-              />
-            ))}
-          </div>
-
-          {/* Previous / Next buttons */}
-          <div className={styles.arrowButtons}>
-            <button
-              type="button"
-              className={styles.navButton}
-              onClick={handlePrev}
-              disabled={!canScrollLeft}
-              aria-label="Previous slide"
-            >
-              <ChevronLeft size={20} aria-hidden="true" />
-            </button>
-            <button
-              type="button"
-              className={styles.navButton}
-              onClick={handleNext}
-              disabled={!canScrollRight}
-              aria-label="Next slide"
-            >
-              <ChevronRight size={20} aria-hidden="true" />
-            </button>
-          </div>
         </div>
       </div>
 
