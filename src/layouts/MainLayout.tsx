@@ -1,9 +1,8 @@
 import React from 'react';
 import { Outlet } from 'react-router-dom';
 import styles from './MainLayout.module.css';
-import { Container } from '@/components/ui';
 import { FloatingNav } from '@/components/navigation';
-import { navigationContent } from '@/content/navigation';
+import { TypographicFooter } from '@/components/footer';
 
 export const MainLayout: React.FC = () => {
   return (
@@ -21,15 +20,8 @@ export const MainLayout: React.FC = () => {
         <Outlet />
       </main>
 
-      {/* Footer foundation (Placeholder for Phase 11 typographic footer) */}
-      <footer className={styles.footerStub}>
-        <Container>
-          <div className={styles.footerBottom}>
-            <p>© {new Date().getFullYear()} Kerala Blasters FC Concept Experience.</p>
-            <p>{navigationContent.legalNotice}</p>
-          </div>
-        </Container>
-      </footer>
+      {/* Large Typographic Football Footer */}
+      <TypographicFooter />
     </div>
   );
 };

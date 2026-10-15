@@ -1,0 +1,229 @@
+.footerRoot {
+  position: relative;
+  width: 100%;
+  background-color: var(--color-black);
+  color: var(--color-white);
+  padding-top: clamp(4rem, 8vw, 8rem);
+  padding-bottom: clamp(2rem, 4vw, 3.5rem);
+  overflow: hidden;
+  border-top: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+/* Giant Typographic Headline */
+.giantWordmarkWrapper {
+  width: 100%;
+  overflow: hidden;
+  padding-bottom: clamp(2rem, 5vw, 4rem);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+  display: flex;
+  justify-content: center;
+  user-select: none;
+}
+
+.giantWordmark {
+  font-family: var(--font-display);
+  font-size: clamp(4.5rem, 16.5vw, 19rem);
+  font-weight: 900;
+  line-height: 0.85;
+  letter-spacing: -0.04em;
+  text-transform: uppercase;
+  color: #FFFFFF;
+  margin: 0;
+  white-space: nowrap;
+  text-align: center;
+  text-shadow: 0 10px 40px rgba(0, 0, 0, 0.5);
+  pointer-events: none;
+}
+
+/* Main Footer Content Grid */
+.footerGrid {
+  display: grid;
+  grid-template-columns: 1.5fr 1fr 1fr 1fr;
+  gap: clamp(2rem, 4vw, 4rem);
+  padding-top: clamp(2.5rem, 5vw, 4.5rem);
+  padding-bottom: clamp(2.5rem, 5vw, 4.5rem);
+}
+
+/* Brand Identity Column */
+.brandColumn {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+.brandHeading {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  font-family: var(--font-display);
+  font-size: 1.125rem;
+  font-weight: 700;
+  letter-spacing: 0.05em;
+  color: var(--color-white);
+  text-transform: uppercase;
+}
+
+.brandDot {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background-color: var(--color-orange-contrast);
+}
+
+.brandLocation {
+  font-size: 0.875rem;
+  color: var(--color-grey-medium);
+  line-height: 1.5;
+}
+
+.conceptNotice {
+  font-size: 0.75rem;
+  color: var(--color-grey-medium);
+  line-height: 1.55;
+  max-width: 38ch;
+  margin-top: 0.5rem;
+}
+
+/* Navigation Columns */
+.navColumn {
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+}
+
+.columnTitle {
+  font-family: var(--font-display);
+  font-size: 0.75rem;
+  font-weight: 700;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--color-orange-contrast);
+  margin-bottom: 0.5rem;
+}
+
+.linkList {
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  gap: 0.6rem;
+  margin: 0;
+  padding: 0;
+}
+
+.footerLink {
+  font-size: 0.875rem;
+  color: rgba(255, 255, 255, 0.75);
+  text-decoration: none;
+  transition: color var(--transition-fast), transform var(--transition-fast);
+  display: inline-flex;
+  align-items: center;
+  gap: 0.35rem;
+  width: fit-content;
+}
+
+.footerLink:hover {
+  color: var(--color-white);
+  transform: translateX(3px);
+}
+
+/* Social Buttons */
+.socialList {
+  display: flex;
+  flex-direction: column;
+  gap: 0.6rem;
+}
+
+.socialPill {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.5rem 0.85rem;
+  border-radius: var(--radius-pill);
+  background-color: rgba(255, 255, 255, 0.05);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  color: var(--color-white);
+  font-size: 0.8125rem;
+  font-weight: 500;
+  text-decoration: none;
+  transition: all var(--transition-fast);
+  width: fit-content;
+}
+
+.socialPill:hover {
+  background-color: var(--color-white);
+  color: var(--color-black);
+  border-color: var(--color-white);
+  transform: translateY(-2px);
+}
+
+/* Bottom Bar */
+.bottomBar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding-top: 2rem;
+  border-top: 1px solid rgba(255, 255, 255, 0.08);
+  font-size: 0.75rem;
+  color: var(--color-grey-medium);
+  flex-wrap: wrap;
+  gap: 1rem;
+}
+
+.copyrightText {
+  color: rgba(255, 255, 255, 0.55);
+}
+
+.backToTopButton {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  background-color: transparent;
+  color: rgba(255, 255, 255, 0.7);
+  border: 1px solid rgba(255, 255, 255, 0.15);
+  border-radius: var(--radius-pill);
+  padding: 0.4rem 0.85rem;
+  font-size: 0.75rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  cursor: pointer;
+  transition: all var(--transition-fast);
+}
+
+.backToTopButton:hover {
+  background-color: var(--color-white);
+  color: var(--color-black);
+  border-color: var(--color-white);
+}
+
+/* Responsive Grid */
+@media (max-width: 1024px) {
+  .footerGrid {
+    grid-template-columns: 1fr 1fr;
+    gap: 2.5rem;
+  }
+
+  .brandColumn {
+    grid-column: span 2;
+  }
+}
+
+@media (max-width: 640px) {
+  .footerGrid {
+    grid-template-columns: 1fr;
+    gap: 2rem;
+  }
+
+  .brandColumn {
+    grid-column: span 1;
+  }
+
+  .giantWordmark {
+    font-size: clamp(3.25rem, 18vw, 6rem);
+  }
+
+  .bottomBar {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+}

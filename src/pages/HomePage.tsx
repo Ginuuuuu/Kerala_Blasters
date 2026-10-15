@@ -4,6 +4,7 @@ import { HeroSection } from '@/components/hero';
 import { OverlappingIntro } from '@/components/standsFor';
 import { SquadPreview } from '@/components/player';
 import { FootballQuote } from '@/components/quote';
+import { RoadmapSection } from '@/components/roadmap';
 
 export const HomePage: React.FC = () => {
   return (
@@ -23,6 +24,9 @@ export const HomePage: React.FC = () => {
 
         {/* Phase 5: Short Football Quote */}
         <FootballQuote />
+
+        {/* Overlapping Scroll-Animated Club Roadmap Timeline */}
+        <RoadmapSection />
       </div>
     </div>
   );
