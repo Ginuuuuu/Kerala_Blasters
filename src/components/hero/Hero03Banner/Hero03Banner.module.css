@@ -46,51 +46,70 @@
   pointer-events: none;
 }
 
-/* Top Left Corner: KERALA */
-.topLeftCorner {
+/* Invisible Bottom-Left Anchor defining the exact bottom baseline on the left */
+.bottomLeftAnchor {
   position: absolute;
-  top: clamp(2.5rem, 5.5vh, 4.5rem);
-  left: clamp(1.5rem, 4vw, 4.5rem);
+  bottom: clamp(1.75rem, 4vh, 3.5rem);
+  left: clamp(1rem, 2.5vw, 3.5rem);
+  width: 1px;
+  height: 1px;
+  pointer-events: none;
+  visibility: hidden;
+}
+
+/* Top-Left Container: KERALA */
+.keralaContainer {
+  position: absolute;
+  top: clamp(1.75rem, 4vh, 3.5rem);
+  left: clamp(1rem, 2.5vw, 3.5rem);
   z-index: 10;
   pointer-events: none;
 }
 
-/* Bottom Right Corner: BLASTERS */
-.bottomRightCorner {
+/* Bottom-Right Container: BLASTERS */
+.blastersContainer {
   position: absolute;
-  bottom: clamp(2.5rem, 5.5vh, 4.5rem);
-  right: clamp(1.5rem, 4vw, 4.5rem);
+  bottom: clamp(1.75rem, 4vh, 3.5rem);
+  right: clamp(1rem, 2.5vw, 3.5rem);
   z-index: 10;
   pointer-events: none;
   text-align: right;
 }
 
-.cornerText {
+/* Monumental Typography — Increased size to fit the space, shadow completely removed */
+.heroText {
   font-family: var(--font-display, "Space Grotesk", sans-serif);
-  font-size: clamp(3.2rem, 7.8vw, 8.5rem);
+  font-size: clamp(4.2rem, 11vw, 13.5rem);
   font-weight: 900;
-  line-height: 0.88;
-  letter-spacing: -0.04em;
+  line-height: 0.82;
+  letter-spacing: -0.045em;
   text-transform: uppercase;
   color: #ffffff;
   margin: 0;
   padding: 0;
-  text-shadow: 0 4px 30px rgba(0, 0, 0, 0.85), 0 2px 12px rgba(0, 0, 0, 0.95);
+  text-shadow: none;
   user-select: none;
+  white-space: nowrap;
+  will-change: transform;
 }
 
 @media (max-width: 768px) {
-  .topLeftCorner {
-    top: clamp(5rem, 10vh, 6.5rem);
-    left: clamp(1.25rem, 3.5vw, 2.5rem);
+  .keralaContainer {
+    top: clamp(4.5rem, 9vh, 6rem);
+    left: clamp(1rem, 3vw, 2rem);
   }
 
-  .bottomRightCorner {
-    bottom: clamp(2rem, 5vh, 3.5rem);
-    right: clamp(1.25rem, 3.5vw, 2.5rem);
+  .bottomLeftAnchor {
+    bottom: clamp(1.75rem, 4vh, 3rem);
+    left: clamp(1rem, 3vw, 2rem);
   }
 
-  .cornerText {
-    font-size: clamp(2.4rem, 11vw, 4.5rem);
+  .blastersContainer {
+    bottom: clamp(1.75rem, 4vh, 3rem);
+    right: clamp(1rem, 3vw, 2rem);
+  }
+
+  .heroText {
+    font-size: clamp(2.8rem, 12vw, 5.5rem);
   }
 }

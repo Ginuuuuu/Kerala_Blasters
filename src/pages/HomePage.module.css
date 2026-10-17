@@ -27,10 +27,9 @@
 }
 
 /* 3. Third Banner: Hero03 Banner (The Squad in sharp formal suits)
-   Slides up directly OVER OverlappingIntro based on scroll */
+   Slides up directly OVER OverlappingIntro based on scroll, then scrolls naturally */
 .hero03BannerLayer {
-  position: sticky;
-  top: 0;
+  position: relative;
   z-index: 30;
   width: 100%;
   height: 100vh;
@@ -41,15 +40,22 @@
   box-sizing: border-box;
 }
 
+.hero03StickyStage {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+  box-sizing: border-box;
+}
+
 /* 4. Fourth Banner: White Page with Title & Sailors (Reserved Content Stage)
-   Slides up directly OVER Hero03 banner based on scroll */
+   Normal Scroll Flow (No overlap) */
 .sailorsBannerLayer {
   position: relative;
   z-index: 35;
   width: 100%;
   height: 100vh;
   height: 100svh;
-  box-shadow: 0 -25px 60px rgba(0, 0, 0, 0.4);
   background-color: var(--color-white, #ffffff);
   overflow: hidden;
   box-sizing: border-box;

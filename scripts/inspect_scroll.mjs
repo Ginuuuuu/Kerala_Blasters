@@ -63,14 +63,12 @@ async function run() {
         const standFor = document.querySelector('[class*="standForBannerLayer"]');
         const hero03 = document.querySelector('[class*="hero03BannerLayer"]');
         const sailors = document.querySelector('[class*="sailorsBannerLayer"]');
-        const quote = document.querySelector('[class*="quoteSection"]');
         return {
           windowHeight: window.innerHeight,
           scrollHeight: document.documentElement.scrollHeight,
           standForTop: standFor ? standFor.getBoundingClientRect().top + window.scrollY : null,
           hero03Top: hero03 ? hero03.getBoundingClientRect().top + window.scrollY : null,
           sailorsTop: sailors ? sailors.getBoundingClientRect().top + window.scrollY : null,
-          quoteTop: quote ? quote.getBoundingClientRect().top + window.scrollY : null,
         };
       })()`,
       returnByValue: true
@@ -85,14 +83,43 @@ async function run() {
       });
       await new Promise(r => setTimeout(r, 600));
 
+      const pos = await send('Runtime.evaluate', {
+        expression: `(() => {
+          const hero03 = document.querySelector('[class*="hero03BannerLayer"]');
+          const kerala = document.querySelector('[class*="keralaContainer"] h2');
+          const blasters = document.querySelector('[class*="blastersContainer"] h2');
+          const serialize = (el) => {
+            if (!el) return null;
+            const r = el.getBoundingClientRect();
+            return { top: Math.round(r.top), bottom: Math.round(r.bottom), left: Math.round(r.left), width: Math.round(r.width), height: Math.round(r.height) };
+          };
+          return {
+            scrollY: window.scrollY,
+            hero03Top: hero03 ? Math.round(hero03.getBoundingClientRect().top) : null,
+            kerala: serialize(kerala),
+            blasters: serialize(blasters)
+          };
+        })()`,
+        returnByValue: true
+      });
+      console.log(`Scroll ${scrollY} status:`, JSON.stringify(pos.result?.value));
+
       const screenshot = await send('Page.captureScreenshot', { format: 'png' });
       fs.writeFileSync(filename, Buffer.from(screenshot.data, 'base64'));
       console.log(`Saved screenshot to ${filename}`);
     };
 
-    // Capture at quote section
-    await captureAtScroll(layout.quoteTop - 100, 'screenshot_quote_entering.png');
-    await captureAtScroll(layout.quoteTop, 'screenshot_quote_normal.png');
+    // 1. Scroll 4500: Hero03 at top: 0 (Banner at top: 0, KERALA at top-left, BLASTERS at bottom-right)
+    await captureAtScroll(layout.hero03Top, 'screenshot_1_hero03_start.png');
+
+    // 2. Scroll 4725: Banner scrolling up, KERALA translating straight down
+    await captureAtScroll(layout.hero03Top + 225, 'screenshot_2_hero03_scrolling.png');
+
+    // 3. Scroll 4950: KERALA reached bottom-left (aligned with BLASTERS on bottom baseline!)
+    await captureAtScroll(layout.hero03Top + 450, 'screenshot_3_hero03_aligned.png');
+
+    // 4. Scroll 5400: Sailors entering in normal scroll
+    await captureAtScroll(layout.sailorsTop, 'screenshot_4_sailors_normal.png');
 
     ws.close();
   } finally {
