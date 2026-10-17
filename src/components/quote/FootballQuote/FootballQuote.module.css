@@ -83,3 +83,29 @@
   color: rgba(255, 255, 255, 0.7);
   max-width: 48ch;
 }
+
+@media (max-width: 768px) {
+  .quoteSection {
+    padding-top: clamp(4rem, 10vh, 5.5rem);
+    padding-bottom: clamp(4rem, 10vh, 5.5rem);
+  }
+
+  .statement {
+    font-size: clamp(2.15rem, 9.2vw, 3.4rem);
+    line-height: 1.05;
+  }
+
+  .watermarkGraphic {
+    right: 2%;
+    top: 55%;
+    font-size: clamp(5.5rem, 22vw, 8.5rem);
+    opacity: 0.02;
+  }
+
+  .supporting {
+    font-size: 0.9375rem;
+    line-height: 1.6;
+    margin-top: 1.5rem;
+  }
+}
+

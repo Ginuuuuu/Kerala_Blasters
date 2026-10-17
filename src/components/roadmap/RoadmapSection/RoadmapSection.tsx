@@ -215,124 +215,131 @@ export const RoadmapSection: React.FC<TimelineProps> = ({
 
     if (!section || !stickyStage || !intro || !viewport || !world || !pathActive) return;
 
-    // Set SVG path length
-    const pathLength = pathActive.getTotalLength();
-    gsap.set(pathActive, {
-      strokeDasharray: pathLength,
-      strokeDashoffset: pathLength,
-    });
+    const mm = gsap.matchMedia();
 
-    // 1. Initial visibility states — INTRO OVERLAY IS 100% VISIBLE ON LOAD
-    gsap.set(intro, { autoAlpha: 1, y: 0, scale: 1 });
-    gsap.set(viewport, { autoAlpha: 0, scale: 0.98 });
+    // DESKTOP ONLY: 2D stepped scrubbed orthogonal world with ScrollTrigger Pinning
+    mm.add('(min-width: 769px)', () => {
+      // Set SVG path length
+      const pathLength = pathActive.getTotalLength();
+      gsap.set(pathActive, {
+        strokeDasharray: pathLength,
+        strokeDashoffset: pathLength,
+      });
 
-    // Milestones: Only initial milestones (2014 & 2016) are visible on load.
-    // Later milestones (2022, 2023, 2024, 2025, 2026, 2026+) reveal ON SCROLL as the line reaches them!
-    steppedMilestones.forEach((m) => {
-      if (m.isInitialVisible) {
-        gsap.set(`.text-${m.id}`, { autoAlpha: 1, y: 0 });
-        gsap.set(`.dot-${m.id}`, { scale: 1 });
-        gsap.set(`.stem-${m.id}`, { scaleX: 1, scaleY: 1 });
-      } else {
-        gsap.set(`.text-${m.id}`, {
-          autoAlpha: 0,
-          y: m.stemDirection === 'up' ? -16 : 16,
-        });
-        gsap.set(`.dot-${m.id}`, { scale: 0 });
-        if (m.stemDirection === 'up' || m.stemDirection === 'down') {
-          gsap.set(`.stem-${m.id}`, { scaleY: 0 });
+      // 1. Initial visibility states — INTRO OVERLAY IS 100% VISIBLE ON LOAD
+      gsap.set(intro, { autoAlpha: 1, y: 0, scale: 1 });
+      gsap.set(viewport, { autoAlpha: 0, scale: 0.98 });
+
+      // Milestones: Only initial milestones (2014 & 2016) are visible on load.
+      steppedMilestones.forEach((m) => {
+        if (m.isInitialVisible) {
+          gsap.set(`.text-${m.id}`, { autoAlpha: 1, y: 0 });
+          gsap.set(`.dot-${m.id}`, { scale: 1 });
+          gsap.set(`.stem-${m.id}`, { scaleX: 1, scaleY: 1 });
         } else {
-          gsap.set(`.stem-${m.id}`, { scaleX: 0 });
+          gsap.set(`.text-${m.id}`, {
+            autoAlpha: 0,
+            y: m.stemDirection === 'up' ? -16 : 16,
+          });
+          gsap.set(`.dot-${m.id}`, { scale: 0 });
+          if (m.stemDirection === 'up' || m.stemDirection === 'down') {
+            gsap.set(`.stem-${m.id}`, { scaleY: 0 });
+          } else {
+            gsap.set(`.stem-${m.id}`, { scaleX: 0 });
+          }
         }
-      }
-    });
+      });
 
-    // 2. Master Unified Scrubbed Scroll Timeline with GSAP Pinning
-    const masterTl = gsap.timeline({
-      scrollTrigger: {
-        trigger: section,
-        start: 'top top',
-        end: 'bottom bottom',
-        pin: stickyStage,
-        anticipatePin: 1,
-        scrub: 0.4,
-        invalidateOnRefresh: true,
-      },
-      defaults: {
-        ease: 'none',
-      },
-    });
-
-    masterTl
-      // Step A: As user continues scrolling, intro dissolves smoothly and glides upward
-      .to(intro, {
-        autoAlpha: 0,
-        y: -30,
-        duration: 1.2,
-        ease: 'power1.inOut',
-      })
-
-      // Step B: Timeline emerges in place smoothly
-      .to(
-        viewport,
-        {
-          autoAlpha: 1,
-          scale: 1,
-          duration: 1.2,
-          ease: 'power1.out',
+      // 2. Master Unified Scrubbed Scroll Timeline with GSAP Pinning
+      const masterTl = gsap.timeline({
+        scrollTrigger: {
+          trigger: section,
+          start: 'top top',
+          end: 'bottom bottom',
+          pin: stickyStage,
+          anticipatePin: 1,
+          scrub: 0.4,
+          invalidateOnRefresh: true,
         },
-        '<0.1'
-      )
-
-      // Step C: Initial line segment through 2014 & 2016 (both visible)
-      .to(
-        pathActive,
-        {
-          strokeDashoffset: pathLength * 0.74,
-          duration: 1.2,
+        defaults: {
+          ease: 'none',
         },
-        '<'
-      )
+      });
 
-      // Step D: Slide horizontally to 2022 (Phase 1)
-      .to(world, { x: -650, y: 0, duration: 3.5 })
-      .to(pathActive, { strokeDashoffset: pathLength * 0.54, duration: 3.5 }, '<')
-      // Milestone 2022 stem, dot & text reveal as line reaches 2022
-      .to('.dot-m-2022', { scale: 1, duration: 0.35, ease: 'back.out(2)' }, '<2.2')
-      .to('.stem-m-2022', { scaleY: 1, duration: 0.35, ease: 'power1.out' }, '<0.05')
-      .to('.text-m-2022', { autoAlpha: 1, y: 0, duration: 0.45, ease: 'power2.out' }, '<0.1')
+      masterTl
+        // Step A: As user continues scrolling, intro dissolves smoothly and glides upward
+        .to(intro, {
+          autoAlpha: 0,
+          y: -30,
+          duration: 1.2,
+          ease: 'power1.inOut',
+        })
 
-      // Step E: Straight downward plunge along X = 1200 (Phase 2)
-      // Camera smoothly tracks Y down to -420, keeping Y = 620 and Y = 800 perfectly centered!
-      .to(world, { x: -650, y: -420, duration: 3.5 })
-      .to(pathActive, { strokeDashoffset: pathLength * 0.34, duration: 3.5 }, '<')
-      // Milestone 2023 (Y = 620) stem, dot & text reveal as line drops past it
-      .to('.dot-m-2023', { scale: 1, duration: 0.35, ease: 'back.out(2)' }, '<1.0')
-      .to('.stem-m-2023', { scaleX: 1, duration: 0.35, ease: 'power1.out' }, '<0.05')
-      .to('.text-m-2023', { autoAlpha: 1, y: 0, duration: 0.45, ease: 'power2.out' }, '<0.1')
-      // Milestone 2024 (Y = 800) stem, dot & text reveal as line reaches bottom of vertical drop
-      .to('.dot-m-2024', { scale: 1, duration: 0.35, ease: 'back.out(2)' }, '<1.4')
-      .to('.stem-m-2024', { scaleX: 1, duration: 0.35, ease: 'power1.out' }, '<0.05')
-      .to('.text-m-2024', { autoAlpha: 1, y: 0, duration: 0.45, ease: 'power2.out' }, '<0.1')
+        // Step B: Timeline emerges in place smoothly
+        .to(
+          viewport,
+          {
+            autoAlpha: 1,
+            scale: 1,
+            duration: 1.2,
+            ease: 'power1.out',
+          },
+          '<0.1'
+        )
 
-      // Step F: Straight sideward sweep along Y = 920 (Phase 3 — 2026 centered in full view!)
-      .to(world, { x: -1700, y: -480, duration: 4.5 })
-      .to(pathActive, { strokeDashoffset: 0, duration: 4.5 }, '<')
-      // Milestone 2025 stem, dot & text reveal
-      .to('.dot-m-2025', { scale: 1, duration: 0.35, ease: 'back.out(2)' }, '<1.4')
-      .to('.stem-m-2025', { scaleY: 1, duration: 0.35, ease: 'power1.out' }, '<0.05')
-      .to('.text-m-2025', { autoAlpha: 1, y: 0, duration: 0.45, ease: 'power2.out' }, '<0.1')
-      // Milestone 2026 (Dedicated Training City) stem, dot & text reveal — Centered in full view
-      .to('.dot-m-2026', { scale: 1, duration: 0.35, ease: 'back.out(2)' }, '<1.4')
-      .to('.stem-m-2026', { scaleY: 1, duration: 0.35, ease: 'power1.out' }, '<0.05')
-      .to('.text-m-2026', { autoAlpha: 1, y: 0, duration: 0.45, ease: 'power2.out' }, '<0.1')
-      // Milestone 2026+ (Forever Kerala Blasters) stem, dot & text reveal — Grand Finale
-      .to('.dot-m-2026-plus', { scale: 1, duration: 0.35, ease: 'back.out(2)' }, '<1.2')
-      .to('.stem-m-2026-plus', { scaleY: 1, duration: 0.35, ease: 'power1.out' }, '<0.05')
-      .to('.text-m-2026-plus', { autoAlpha: 1, y: 0, duration: 0.45, ease: 'power2.out' }, '<0.1')
+        // Step C: Initial line segment through 2014 & 2016 (both visible)
+        .to(
+          pathActive,
+          {
+            strokeDashoffset: pathLength * 0.74,
+            duration: 1.2,
+          },
+          '<'
+        )
 
-      // Step G: Hold the completed timeline and final milestone comfortably in full view
-      .to({}, { duration: 2.2 });
+        // Step D: Slide horizontally to 2022 (Phase 1)
+        .to(world, { x: -650, y: 0, duration: 3.5 })
+        .to(pathActive, { strokeDashoffset: pathLength * 0.54, duration: 3.5 }, '<')
+        // Milestone 2022 stem, dot & text reveal as line reaches 2022
+        .to('.dot-m-2022', { scale: 1, duration: 0.35, ease: 'back.out(2)' }, '<2.2')
+        .to('.stem-m-2022', { scaleY: 1, duration: 0.35, ease: 'power1.out' }, '<0.05')
+        .to('.text-m-2022', { autoAlpha: 1, y: 0, duration: 0.45, ease: 'power2.out' }, '<0.1')
+
+        // Step E: Straight downward plunge along X = 1200 (Phase 2)
+        .to(world, { x: -650, y: -420, duration: 3.5 })
+        .to(pathActive, { strokeDashoffset: pathLength * 0.34, duration: 3.5 }, '<')
+        // Milestone 2023 (Y = 620) stem, dot & text reveal as line drops past it
+        .to('.dot-m-2023', { scale: 1, duration: 0.35, ease: 'back.out(2)' }, '<1.0')
+        .to('.stem-m-2023', { scaleX: 1, duration: 0.35, ease: 'power1.out' }, '<0.05')
+        .to('.text-m-2023', { autoAlpha: 1, y: 0, duration: 0.45, ease: 'power2.out' }, '<0.1')
+        // Milestone 2024 (Y = 800) stem, dot & text reveal as line reaches bottom of vertical drop
+        .to('.dot-m-2024', { scale: 1, duration: 0.35, ease: 'back.out(2)' }, '<1.4')
+        .to('.stem-m-2024', { scaleX: 1, duration: 0.35, ease: 'power1.out' }, '<0.05')
+        .to('.text-m-2024', { autoAlpha: 1, y: 0, duration: 0.45, ease: 'power2.out' }, '<0.1')
+
+        // Step F: Straight sideward sweep along Y = 920 (Phase 3)
+        .to(world, { x: -1700, y: -480, duration: 4.5 })
+        .to(pathActive, { strokeDashoffset: 0, duration: 4.5 }, '<')
+        // Milestone 2025 stem, dot & text reveal
+        .to('.dot-m-2025', { scale: 1, duration: 0.35, ease: 'back.out(2)' }, '<1.4')
+        .to('.stem-m-2025', { scaleY: 1, duration: 0.35, ease: 'power1.out' }, '<0.05')
+        .to('.text-m-2025', { autoAlpha: 1, y: 0, duration: 0.45, ease: 'power2.out' }, '<0.1')
+        // Milestone 2026 (Dedicated Training City) stem, dot & text reveal
+        .to('.dot-m-2026', { scale: 1, duration: 0.35, ease: 'back.out(2)' }, '<1.4')
+        .to('.stem-m-2026', { scaleY: 1, duration: 0.35, ease: 'power1.out' }, '<0.05')
+        .to('.text-m-2026', { autoAlpha: 1, y: 0, duration: 0.45, ease: 'power2.out' }, '<0.1')
+        // Milestone 2026+ (Forever Kerala Blasters) stem, dot & text reveal
+        .to('.dot-m-2026-plus', { scale: 1, duration: 0.35, ease: 'back.out(2)' }, '<1.2')
+        .to('.stem-m-2026-plus', { scaleY: 1, duration: 0.35, ease: 'power1.out' }, '<0.05')
+        .to('.text-m-2026-plus', { autoAlpha: 1, y: 0, duration: 0.45, ease: 'power2.out' }, '<0.1')
+
+        // Step G: Hold the completed timeline and final milestone comfortably in full view
+        .to({}, { duration: 2.2 });
+
+      return () => {
+        masterTl.kill();
+      };
+    });
 
     const handleResize = () => {
       ScrollTrigger.refresh();
@@ -342,6 +349,7 @@ export const RoadmapSection: React.FC<TimelineProps> = ({
 
     return () => {
       window.removeEventListener('resize', handleResize);
+      mm.revert();
     };
   }, { scope: sectionRef });
 
@@ -473,6 +481,58 @@ export const RoadmapSection: React.FC<TimelineProps> = ({
               );
             })}
           </div>
+        </div>
+      </div>
+
+      {/* MOBILE UI: Dedicated Vertical Timeline Stage (max-width: 768px only) */}
+      <div className={styles.mobileTimelineStage}>
+        {/* Mobile Intro Header */}
+        <div className={styles.mobileIntro}>
+          {introEyebrow ? <span className={styles.mobileEyebrow}>{introEyebrow}</span> : <span className={styles.mobileEyebrow}>EST. 2014 • CLUB ROADMAP</span>}
+          <h2 className={styles.mobileTitle}>{introTitle}</h2>
+          {introSubtitle ? <p className={styles.mobileSubtitle}>{introSubtitle}</p> : null}
+          <div className={styles.mobileArrow} aria-hidden="true">↓</div>
+        </div>
+
+        {/* Lead Stadium Card */}
+        <div className={styles.mobileLeadCard}>
+          <img
+            src={imageUrl}
+            alt={imageAlt}
+            draggable={false}
+            className={styles.mobileLeadImg}
+          />
+          <div className={styles.mobileLeadOverlay}>
+            <span className={styles.mobileLeadPill}>EST. 2014</span>
+            <div>
+              <div className={styles.mobileLeadKicker}>THE JOURNEY</div>
+              <div className={styles.mobileLeadHeadline}>
+                From Kochi to Continental Ambition
+              </div>
+            </div>
+          </div>
+        </div>
+
+        {/* Mobile Vertical Timeline */}
+        <div className={styles.mobileTimelineList}>
+          <div className={styles.mobileVerticalLine} aria-hidden="true" />
+          {steppedMilestones.map((m) => (
+            <div key={m.id} className={styles.mobileMilestoneItem}>
+              {/* Connector Dot */}
+              <div className={styles.mobileMarkerDot} aria-hidden="true" />
+
+              {/* Card Body */}
+              <div className={styles.mobileCardContent}>
+                <div className={styles.mobileCardMeta}>
+                  <span className={styles.mobileYear}>{m.year}</span>
+                  <span className={styles.mobileMonth}>{m.month}</span>
+                </div>
+                <h3 className={styles.mobileMilestoneTitle}>{m.title}</h3>
+                <div className={styles.mobileSlangQuote}>{m.slangQuote}</div>
+                <p className={styles.mobileMilestoneDesc}>{m.content}</p>
+              </div>
+            </div>
+          ))}
         </div>
       </div>
     </section>

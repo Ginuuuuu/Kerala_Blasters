@@ -68,3 +68,35 @@
   width: 100%;
   background-color: var(--color-white, #ffffff);
 }
+
+/* Mobile-Specific Responsive Overrides (Desktop remains 100% untouched) */
+@media (max-width: 768px) {
+  .standForBannerLayer {
+    position: relative;
+    top: auto;
+    height: auto;
+    min-height: 100svh;
+    overflow: visible;
+    box-shadow: none;
+  }
+
+  .standForStickyStage {
+    height: auto;
+    overflow: visible;
+  }
+
+  .hero03BannerLayer {
+    position: relative;
+    height: 100svh;
+    min-height: 100svh;
+    box-shadow: none;
+  }
+
+  .sailorsBannerLayer {
+    position: relative;
+    height: auto;
+    min-height: 85svh;
+    overflow: visible;
+  }
+}
+

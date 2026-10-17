@@ -370,90 +370,247 @@
 }
 
 /* --------------------------------------------------------------------------
-   Mobile & Tablet Fallback
+   Mobile & Desktop Dual Presentation (Desktop 100% untouched)
    -------------------------------------------------------------------------- */
-@media (max-width: 768px) {
-  .journeySection {
-    height: auto;
-    overflow: visible;
-  }
-
-  .stickyStage {
-    position: relative;
-    height: auto;
-    min-height: unset;
-    overflow: visible;
-  }
-
-  .introOverlay {
-    position: relative;
-    height: auto;
-    padding: 5rem 1.25rem 3rem 1.25rem;
-    opacity: 1 !important;
-    visibility: visible !important;
-    transform: none !important;
-  }
-
-  .viewportStage {
-    position: relative;
-    height: auto;
-    opacity: 1 !important;
-    visibility: visible !important;
-    overflow: visible;
-    padding: 1.5rem;
-  }
-
-  .steppedWorld {
-    position: relative;
-    width: 100%;
-    height: auto;
-    transform: none !important;
-    display: flex;
-    flex-direction: column;
-    gap: 2.5rem;
-  }
-
-  .svgLayer {
-    display: none;
-  }
-
-  .leadCard {
-    position: relative;
-    left: 0;
-    top: 0;
-    width: 100%;
-    height: 240px;
-  }
-
-  .milestoneAnchor {
-    position: relative;
-    left: 0 !important;
-    top: 0 !important;
-    width: 100%;
-  }
-
-  .stemLine {
-    display: none;
-  }
-
-  .markerDot {
-    position: static;
-    display: inline-block;
-    margin-bottom: 0.5rem;
-    transform: none !important;
-  }
-
-  .textGroup {
-    position: relative;
-    left: 0 !important;
-    right: 0 !important;
-    top: 0 !important;
-    bottom: 0 !important;
-    width: 100%;
-    transform: none !important;
-    opacity: 1 !important;
-    border-left: 2px solid var(--color-orange-contrast, #dda477);
-    padding-left: 1.25rem;
-    text-align: left !important;
+@media (min-width: 769px) {
+  .mobileTimelineStage {
+    display: none !important;
   }
 }
+
+@media (max-width: 768px) {
+  .journeySection {
+    height: auto !important;
+    min-height: auto;
+    overflow: visible;
+    padding: 0;
+  }
+
+  /* Completely hide the desktop GSAP world stage on mobile */
+  .stickyStage {
+    display: none !important;
+  }
+
+  /* Dedicated Mobile Vertical Timeline */
+  .mobileTimelineStage {
+    display: flex !important;
+    flex-direction: column;
+    width: 100%;
+    padding: clamp(3.5rem, 8vh, 5rem) 1.25rem 3rem 1.25rem;
+    box-sizing: border-box;
+    background-color: var(--color-white, #ffffff);
+  }
+
+  /* Mobile Intro Header */
+  .mobileIntro {
+    text-align: center;
+    margin-bottom: 2.25rem;
+  }
+
+  .mobileEyebrow {
+    font-family: var(--font-mono, monospace);
+    font-size: 0.75rem;
+    font-weight: 700;
+    letter-spacing: 0.16em;
+    text-transform: uppercase;
+    color: #777777;
+    margin-bottom: 0.75rem;
+    display: inline-block;
+  }
+
+  .mobileTitle {
+    font-family: var(--font-display, "Space Grotesk", sans-serif);
+    font-size: clamp(2.4rem, 10vw, 3.6rem);
+    font-weight: 700;
+    line-height: 1.05;
+    letter-spacing: -0.03em;
+    color: #111111;
+    margin: 0 0 0.5rem 0;
+    white-space: pre-line;
+  }
+
+  .mobileSubtitle {
+    font-family: var(--font-body, "Inter", sans-serif);
+    font-size: 0.9375rem;
+    line-height: 1.55;
+    color: #666666;
+    margin: 0;
+  }
+
+  .mobileArrow {
+    font-size: 1.5rem;
+    color: var(--color-orange-contrast, #dda477);
+    margin-top: 1rem;
+    animation: floatArrow 2.2s ease-in-out infinite;
+  }
+
+  /* Mobile Lead Stadium Card */
+  .mobileLeadCard {
+    position: relative;
+    width: 100%;
+    height: 220px;
+    border-radius: 16px;
+    overflow: hidden;
+    margin-bottom: 2.25rem;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.08);
+    background-color: #111111;
+  }
+
+  .mobileLeadImg {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+  }
+
+  .mobileLeadOverlay {
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(
+      180deg,
+      rgba(17, 17, 17, 0.15) 0%,
+      rgba(17, 17, 17, 0.6) 45%,
+      rgba(17, 17, 17, 0.95) 100%
+    );
+    padding: 1.25rem;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    color: #ffffff;
+    box-sizing: border-box;
+  }
+
+  .mobileLeadPill {
+    align-self: flex-start;
+    font-family: var(--font-body, "Inter", sans-serif);
+    font-size: 0.6875rem;
+    font-weight: 700;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    background-color: var(--color-orange-contrast, #dda477);
+    color: #111111;
+    padding: 0.25rem 0.6rem;
+    border-radius: 9999px;
+  }
+
+  .mobileLeadKicker {
+    font-family: var(--font-mono, monospace);
+    font-size: 0.6875rem;
+    letter-spacing: 0.1em;
+    opacity: 0.85;
+    margin-bottom: 0.25rem;
+    text-transform: uppercase;
+  }
+
+  .mobileLeadHeadline {
+    font-family: var(--font-display, "Space Grotesk", sans-serif);
+    font-size: 1.15rem;
+    font-weight: 700;
+    line-height: 1.2;
+  }
+
+  /* Mobile Vertical Timeline List */
+  .mobileTimelineList {
+    position: relative;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+    padding-left: 1.75rem;
+    box-sizing: border-box;
+  }
+
+  .mobileVerticalLine {
+    position: absolute;
+    left: 6px;
+    top: 14px;
+    bottom: 24px;
+    width: 2px;
+    background: linear-gradient(
+      180deg,
+      var(--color-orange-contrast, #dda477) 0%,
+      var(--color-orange-contrast, #dda477) 85%,
+      #e5e5e5 100%
+    );
+  }
+
+  .mobileMilestoneItem {
+    position: relative;
+    width: 100%;
+  }
+
+  .mobileMarkerDot {
+    position: absolute;
+    left: -1.75rem;
+    top: 8px;
+    width: 12px;
+    height: 12px;
+    border-radius: 50%;
+    background-color: var(--color-orange-contrast, #dda477);
+    border: 2px solid #ffffff;
+    box-shadow: 0 0 10px rgba(221, 164, 119, 0.8);
+    transform: translateX(1px);
+    z-index: 2;
+  }
+
+  .mobileCardContent {
+    background-color: #fafafa;
+    border: 1px solid #ebebeb;
+    border-radius: 14px;
+    padding: 1.15rem 1.1rem;
+    display: flex;
+    flex-direction: column;
+    gap: 0.45rem;
+    box-sizing: border-box;
+  }
+
+  .mobileCardMeta {
+    display: flex;
+    align-items: baseline;
+    gap: 0.5rem;
+  }
+
+  .mobileYear {
+    font-family: var(--font-display, "Space Grotesk", sans-serif);
+    font-size: 1.45rem;
+    font-weight: 800;
+    color: #111111;
+    line-height: 1;
+  }
+
+  .mobileMonth {
+    font-family: var(--font-mono, monospace);
+    font-size: 0.6875rem;
+    font-weight: 700;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: #777777;
+  }
+
+  .mobileMilestoneTitle {
+    font-family: var(--font-display, "Space Grotesk", sans-serif);
+    font-size: 1.05rem;
+    font-weight: 700;
+    color: #111111;
+    margin: 0.1rem 0;
+    line-height: 1.25;
+  }
+
+  .mobileSlangQuote {
+    font-family: var(--font-display, "Space Grotesk", sans-serif);
+    font-size: 0.8125rem;
+    font-weight: 600;
+    font-style: italic;
+    line-height: 1.35;
+    color: #c2410c;
+  }
+
+  .mobileMilestoneDesc {
+    font-family: var(--font-body, "Inter", sans-serif);
+    font-size: 0.875rem;
+    line-height: 1.5;
+    color: #444444;
+    margin: 0;
+  }
+}
+
